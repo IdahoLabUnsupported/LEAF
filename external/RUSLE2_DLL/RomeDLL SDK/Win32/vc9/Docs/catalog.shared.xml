@@ -1,0 +1,216 @@
+<?xml version="1.0" standalone="no" ?>
+
+<!-- Use an external DTD to validate this XML document. -->
+<!DOCTYPE Catalog SYSTEM "catalog.dtd"
+  [
+	<!--
+	Define symbolic constants used by the catalog.
+	These generally come from symbols defined in "resource.h" and "model.h".
+	These are NOT automatically updated when the symbols defined in the header change!
+	-->
+	<!ENTITY ID_DATA_COEFF		'9004'>
+	<!ENTITY ID_DATA_LIMITS		'9102'>
+	<!ENTITY ID_DATA_CLIMATE	'306'>
+	<!ENTITY ID_DATA_MANAGEMENT	'307'>
+	<!ENTITY ID_DATA_OPERATION	'302'>
+	<!ENTITY ID_DATA_RESIDUE	'304'>
+	<!ENTITY ID_DATA_SLOPE		'305'>
+	<!ENTITY ID_DATA_SOIL		'301'>
+	<!ENTITY ID_DATA_VEGETATION	'303'>
+	<!ENTITY ID_DATA_STRUCTURE	'310'>
+
+  ]
+>
+
+<!--
+ Catalog entries for the Rusle2 catalog.
+ These largely follow the format of saved Rusle2 files, to make processing easier.
+ The parameters for each object are placed inside the <Obj> or <Sub> element for that object type.
+   Note, however, that some parameters can occur in multiple objects when they are promoted.
+   The <AllowAttr ...> element is used to declare attrs that are defined in another [sub]object.
+ In the runtime catalog implementation all parameter listings are held by a single data structure the same level.
+
+ This XML "catalog" defines the complete scientific model structure.
+ It is loaded once on application startup, to create "listings" for object/parameter definitions.
+ Instances are created at runtime from these catalog listing entries.
+ The catalog doesn't specify the appearance of the model - that is specified by user templates.
+
+ Copyright (C) 1994-2005 University of Tennessee.
+ All rights reserved.
+-->
+
+<!--
+  SCIENCEVERSION
+  The following science versions must be in synch:
+  - the science version in the ScienceChange array SharedScienceChanges[].
+  - the science version in DefineSharedModel().
+  - the science version in "catalog.shared.xml".
+-->
+
+<Catalog Model="shared" Science="20090107">
+
+
+<Objects>
+	<!-- Define [file] object types:
+		The bitmap ID is a string of the form "res://bitmap-name" for internal (resource) bitmaps.
+		The [toolbar] button ID "Btn" is an integer defined in "resource.h". It is defined above in the inline DOCTYPE for this file.
+		See "catalog.dtd" for a full descripton of the attribute values.
+	-->
+	<Obj Name="COEFFICIENTS"		Ext="coe"		Bit="res://bit_coe.bmp"		Btn="&ID_DATA_COEFF;"		Table="no path coeff"	Flags="OBJT_BUILTIN | OBJT_ISFILE"/>
+	<Obj Name="CONSTANTS"			Ext=""			Bit=""						Btn="0"						Table="constants"		Flags="OBJT_BUILTIN | OBJT_ISFILE"/>
+	<Obj Name="LIMITS"				Ext="lim"		Bit="res://bit_lim.bmp"		Btn="&ID_DATA_LIMITS;"		Table="limits"/>
+
+	<Obj Name="CLIMATE"				Ext="cli"		Bit="res://bit_cli.bmp"		Btn="&ID_DATA_CLIMATE;"		Table="climates"/>
+	<Obj Name="MANAGEMENT"			Ext="man"		Bit="res://bit_man.bmp"		Btn="&ID_DATA_MANAGEMENT;"	Table="managements"/>
+	<Obj Name="OPERATION"			Ext="ope"		Bit="res://bit_ope.bmp"		Btn="&ID_DATA_OPERATION;"	Table="operations"/>
+	<Obj Name="RESIDUE"				Ext="rsd"		Bit="res://bit_rsd.bmp"		Btn="&ID_DATA_RESIDUE;"		Table="residues"/>
+	<Obj Name="SLOPE"				Ext="pro"		Bit="res://bit_pro.bmp"		Btn="&ID_DATA_SLOPE;"		Table="profiles"/>
+	<Obj Name="SOIL"				Ext="soi"		Bit="res://bit_soi.bmp"		Btn="&ID_DATA_SOIL;"		Table="soils"/>
+	<Obj Name="VEGETATION"			Ext="veg"		Bit="res://bit_veg.bmp"		Btn="&ID_DATA_VEGETATION;"	Table="vegetations"/>
+<!--<Obj Name="STRUCTURE_BARRIER"	Ext="stc"		Bit="res://bit_stc.bmp"		Btn="&ID_DATA_STRUCTURE;"	Table="structures-barriers"/> -->
+
+	<Obj Name="GUI_ACCESS"			Flags="OBJT_UNIQUE"/>
+</Objects>
+
+
+<Obj Name="CONSTANTS">
+	<Dte Name="DAYS_IN_YEAR"			Fn="FN_INDEX_DAYS_IN_YEAR"	Unit="U_MMDD"			Min="0" Default="0" Max="365"	d0="365"/>
+		<Flags>ACF_NO_USER_SIZE | ACF_NO_USER_EDIT</Flags>
+<!--<Flt Name="HALF_MONTH"				Fn="FN_INDEX_FROM_ONE"		Unit=""					Min="1" Default="1" Max="24"	d0="24"/> -->
+	<Str Name="HALF_MONTH_STR"			Fn="FN_HALF_MONTH"			Unit=""					Default=""			d0="24"/>
+		<Flags>ACF_NO_USER_SIZE | ACF_NO_USER_EDIT</Flags>
+	<Str Name="MONTHS"					Fn="FN_MONTHS"				Unit=""					Default=""			d0="12"/>
+		<Flags>ACF_NO_USER_SIZE | ACF_NO_USER_EDIT</Flags>
+</Obj>
+
+<Obj Name="CLIMATE">
+	<Str Name="CLI_DESCRIP"/>
+	<Flt Name="ELEV"					Fn=""						Unit="U_FOOT"			Min="-1000" Default="1000" Max="50000"/>
+	<Flt Name="FREEZE_FREE"				Fn=""						Unit="U_DAYS"			Min="0" Default="200" Max="365"/>
+		<Flags>ACF_NO_USER_SIZE | ACF_NO_USER_EDIT</Flags>
+</Obj>
+
+
+<Obj Name="GUI_ACCESS">
+	<Sta Name="GUI_REDO"/>
+	<Sta Name="GUI_UNDO"/>
+	<Sta Name="GUI_LOAD_TEMPLATE"/>
+	<Sta Name="GUI_EDIT_TEMPLATE"/>
+	<Sta Name="GUI_SAVE_TEMPLATE"/>
+
+	<Sta Name="GUI_DB_COMPARE"/>
+	<Sta Name="GUI_DB_COMPACT"/>
+	<Sta Name="GUI_DB_CHECK"/>
+	<Sta Name="GUI_DB_REARRANGE"/>
+	<Sta Name="GUI_DB_IMPORT_R1"/>
+	<Sta Name="GUI_DB_IMPORT_R2"/>
+	<Sta Name="GUI_DB_EXPORT_R2"/>
+	<Sta Name="GUI_DB_IMPORT_FILE"/>
+	<Sta Name="GUI_DB_EXPORT_FILE"/>
+	<Sta Name="GUI_DB_REPAIR"/>
+	<Sta Name="GUI_DB_STARTUP"/>
+	<Sta Name="GUI_DB_IMPORT_NZ_RAIN"/>
+
+	<Sta Name="GUI_FILE_IMPORT"/>
+	<Sta Name="GUI_FILE_EXPORT"/>
+
+	<Sta Name="GUI_FILE_IMPORT_NRCS"/>
+	<Sta Name="GUI_FILE_IMPORT_RUSLE2"/>
+	<Sta Name="GUI_FILE_IMPORT_NASIS_SOIL"/>
+	<Sta Name="GUI_FILE_IMPORT_USDA_CLIMATE"/>
+
+	<Sta Name="GUI_FILE_EXPORT_FILESET"/>
+	<Sta Name="GUI_FILE_EXPORT_NRCS"/>
+	<Sta Name="GUI_FILE_EXPORT_RUSLE2"/>
+
+	<Sta Name="GUI_FILE_CLONE"/>
+	<Sta Name="GUI_FILE_APPLY_PARAM"/>
+
+	<Sta Name="GUI_TOOLS_DUMP_WEB"/>
+	<Sta Name="GUI_TOOLS_VALIDATE_REPORTS"/>
+
+	<Sta Name="GUI_ADMIN_ACCESS_SAVE_TEXT"/>
+<!--<Sta Name="GUI_ADMIN_PERMS_LOAD_TEXT"/> -->
+<!--<Sta Name="GUI_ADMIN_PERMS_SAVE_TEXT"/> -->
+
+
+	<!--
+	 This controls how much the user can use MDBS:
+	 HIDE: can't use or see at all.
+	 SEE:  import only, do diffs,...
+	 EDIT: load, run, save.
+	-->
+	<Sta Name="GUI_MDB_ACCESS"/>
+
+
+	<!--
+	 This controls whether/not the user can edit the base attr
+	 when an overridden value is present for it in an open file.
+	 HIDE: hide cell (UNIMPLEMENTED)
+	 SEE:  show cell as readonly.
+	 EDIT: allow editing even when overridden.
+	-->
+	<Sta Name="GUI_OVERRIDE_BASE"/>
+
+	<!--
+	 This controls whether/not to show override attrs with special visuals.
+	 HIDE: don't show extra visual indicator
+	 SEE:  show extra indicator
+	 EDIT: show indicator and allow using to change status.
+	-->
+<!--<Sta Name="GUI_OVERRIDE_VISUAL"/> -->
+
+</Obj>
+
+
+<Obj Name="MANAGEMENT">
+</Obj>
+
+
+<Obj Name="OPERATION">
+	<Str Name="OP_DESCRIP"/>
+	<Flt Name="OP_SPEED_MIN"			Fn=""					Unit="U_MILES_P_HR"	Min="0" Default="3" Max="20"/>
+	<Flt Name="OP_SPEED_MAX"			Fn=""					Unit="U_MILES_P_HR"	Min="0" Default="8" Max="20"/>
+	<Flt Name="OP_SPEED"				Fn=""					Unit="U_MILES_P_HR"	Min="0" Default="4" Max="20"/>
+</Obj>
+
+
+<Obj Name="RESIDUE">
+	<Str Name="RES_DESCRIP"/>
+</Obj>
+
+
+<Obj Name="SLOPE">
+	<Str Name="SLOPE_DESCRIP"/>
+	<ObR Name="CLIMATE_PTR"				Fn=""					Unit=""			Default="#ENTRY_DEFAULT"	Obj="CLIMATE"/>
+</Obj>
+
+
+<Obj Name="SOIL">
+	<Str Name="SOIL_DESCRIP"			Default=" "/>
+	<Flt Name="ORGANIC_MATTER"			Fn=""					Unit="U_PERCENT"	Min="0" Default="2.5" Max="100"/>
+	<Lst Name="PERMEABILITY"			Fn=""					Unit=""				Default="PERMEABILITY_SLOW_TO_MOD"/>
+		<Choices Attr="PERMEABILITY">"PERMEABILITY_RAPID", "PERMEABILITY_MOD_TO_RAPID", "PERMEABILITY_MOD",
+						"PERMEABILITY_SLOW_TO_MOD", "PERMEABILITY_SLOW", "PERMEABILITY_VERY_SLOW"</Choices>
+	<Bit Name="SOIL_GRAPHIC"			Fn="FN_SOIL_GRAPHIC"/>
+</Obj>
+
+
+<Obj Name="VEGETATION">
+	<Str Name="VEG_DESCRIP"/>
+<!--	<ObR Name="VEG_RES"					Fn=""					Unit=""				Default="#ENTRY_DEFAULT"	Obj="RESIDUE"/> -->
+	<ObR Name="VEG_ROOT_RES"			Fn=""					Unit=""				Default="#ENTRY_DEFAULT"	Obj="RESIDUE"/>
+</Obj>
+
+
+<CalcFns>
+	<Fn Name="FN_INDEX_FROM_ONE"			Code="FnIndexFromOne"		Flags="FNF_FORCE_AUTOUPDATE | FNF_PROMOTABLE"/>
+	<Fn Name="FN_MONTHS"					Code="FnMonths"/>
+<!--	<Fn Name="FN_DAILY_TEMP"				Code="FnDailyTemp"/> -->
+<!--	<Fn Name="FN_DAILY_PRECIP"				Code="FnDailyPrecip"/> -->
+	<Fn Name="FN_MAN_GRAPHIC"				Code="FnManGraphic"/>
+	<Fn Name="FN_SOIL_GRAPHIC"				Code="FnSoilGraphic"/>
+</CalcFns>
+
+
+</Catalog>

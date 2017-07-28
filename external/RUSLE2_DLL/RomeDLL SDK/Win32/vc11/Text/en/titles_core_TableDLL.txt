@@ -1,0 +1,8 @@
+*****************************************************************
+** Translation string (title) map for Rusle2 (www.rusle2.org). **
+** This file is part of the Rusle2 distribution.               **
+** See "Rusle2 Translation Titles.rtf" for more information.   **
+*****************************************************************
+
+** This file contains titles which appear in the TableDLL.
+

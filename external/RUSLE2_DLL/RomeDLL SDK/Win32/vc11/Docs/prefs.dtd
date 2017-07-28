@@ -1,0 +1,222 @@
+<!--
+  External DTD for validating XML preferences files stored by Rusle2.
+  By default this is not included in the XML file but can be manually using
+    <!DOCTYPE Preferences SYSTEM "absolute or relative path to DTD file">
+-->
+
+<!-- ======================================================================= -->
+
+
+<!ELEMENT Preferences (
+	Science,
+	FontSize,
+	HighlightTab?,
+	ShowCalendar?,
+	ParamPrefs,
+	Object*,
+	Defaults?,
+	StartupObj,
+	StartupType?,
+	StartupFile?
+	)
+>
+
+
+<!-- Science dates have format YYYYMMDD.
+  -->
+<!ELEMENT Science	(#PCDATA)
+>
+
+
+<!ELEMENT FontSize	(#PCDATA)
+>
+
+
+<!-- This element only takes the literal value "T". -->
+<!ELEMENT HighlightTab	(#PCDATA)
+>
+
+
+<!-- This element only takes the literal value "T". -->
+<!ELEMENT ShowCalendar	(#PCDATA)
+>
+
+
+<!ELEMENT ParamPrefs
+	(Parameter*)
+>
+
+
+<!-- Note: this element is used in both <ParamPrefs> and <Table>,
+  with different formats! It is not possible to define these in a
+  context-sensitive way in a DTD. So we modify this definition to
+  be able to parse both.
+    The version in a <Table> only contains the name of a param.
+    The version in a <ParamPrefs> contains no text content, but does
+  contain a number of elements. The Name element is required, but
+  has been made optional to allow parsing the <Table> version.
+    Note: because this element must be able to parse "mixed content",
+  we cannot enforce its actual structure:
+	( #PCDATA | (Name, Unit?, Var?, Integer?, Digits?) )
+	Note: #PCDATA MUST be listed FIRST.
+  -->
+<!ELEMENT Parameter
+	(
+		#PCDATA |
+		Name | Unit | Var | Integer | Digits
+	)*
+>
+
+
+<!ELEMENT Name	(#PCDATA)
+>
+
+
+<!ELEMENT Unit	(#PCDATA)
+>
+
+
+<!-- This element only takes the literal value "cumulative". -->
+<!ELEMENT Var	(cumulative)
+>
+
+
+<!-- This element only takes the literal value "1". -->
+<!ELEMENT Integer	(#PCDATA)
+>
+
+
+<!ELEMENT Digits	(#PCDATA)
+>
+
+
+<!ELEMENT Object (
+	Name,
+	Bitmap?,
+	Folder*
+	)
+>
+
+
+<!-- The string ID of a bitmap to use for the object in the Rusle2 GUI. It is optional.
+  This has format "res://bitmap-name" for internal (resource) bitmaps,
+  For external bitmaps it is a filename relative to the Rusle2\Users directory.
+  This should be NULL or empty for non-file objects that don't show on the toolbar.
+  Bitmap names (the part after "res://") and filenames are case-insensitive.
+  -->
+<!ELEMENT Bitmap	(#PCDATA)
+>
+
+
+<!ELEMENT Folder (
+	Name,
+	Element*,
+	Visual*,
+	Table*
+	)
+>
+
+
+<!ELEMENT Element (
+	Name,
+	Location*
+	)
+>
+
+
+<!-- Each element has data in format: "R%d C%d H%d W%d".
+  -->
+<!ELEMENT Location	(#PCDATA)
+>
+
+
+<!ELEMENT Visual (
+	Name,
+	ColsRes?,
+	RowsRes?,
+	ViewCols?,
+	ViewRows?,
+	HeaderSize,
+	CtrlType,
+	Flags,
+	ColWidth?,
+	TableNum?,
+	ReplaceParam?
+	)
+>
+
+
+<!ELEMENT ColsRes		(#PCDATA)	>	<!-- positive integer -->
+<!ELEMENT RowsRes		(#PCDATA)	>	<!-- positive integer -->
+<!ELEMENT ViewCols		(#PCDATA)	>	<!-- positive integer -->
+<!ELEMENT ViewRows		(#PCDATA)	>	<!-- positive integer -->
+<!ELEMENT HeaderSize	(#PCDATA)	>	<!-- positive integer -->
+<!ELEMENT CtrlType		(#PCDATA)	>	<!-- positive integer -->
+<!ELEMENT Flags			(#PCDATA)	>	<!-- positive integer -->
+<!ELEMENT ColWidth		(#PCDATA)	>	<!-- positive integer -->
+<!ELEMENT TableNum		(#PCDATA)	>	<!-- positive integer -->
+
+
+<!ELEMENT ReplaceParam	(#PCDATA)
+>
+
+
+<!-- The Parameter element here is DIFFERENT from Parameter element in ParamPrefs!
+  However, this version will both parse correctly with the other's definition.
+  -->
+<!ELEMENT Table (
+	Name,
+	Parameter*,
+	Dims?,
+	Visual*,
+	DataRows,
+	DataCols,
+	ColsRes,
+	RowsRes,
+	HeaderSize,
+	Flags,
+	Title
+	)
+>
+
+
+<!ELEMENT DataRows		(#PCDATA)	>	<!-- positive integer -->
+<!ELEMENT DataCols		(#PCDATA)	>	<!-- positive integer -->
+
+
+<!ELEMENT Dims		(#PCDATA)	>
+
+
+<!ELEMENT Title		(#PCDATA)	>
+
+
+<!ELEMENT Defaults
+	(Default*)
+>
+
+
+<!-- Each default contains a pair of single-quote delimited items.
+  The 1st is the Rusle2 object name.
+  The 2nd is the encoded filename.
+  -->
+<!ELEMENT Default		(#PCDATA)
+>
+
+
+<!ELEMENT StartupObj	(#PCDATA)
+>
+
+
+<!-- Note: the only legal values are (None | Intro | Type).
+  -->
+<!ELEMENT StartupType	(#PCDATA)
+>
+
+
+<!-- Note: the only legal values are (Default | Last | New).
+  -->
+<!ELEMENT StartupFile	(#PCDATA)
+>
+
+
+<!-- ======================================================================= -->

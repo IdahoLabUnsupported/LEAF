@@ -1,0 +1,6 @@
+Disclaimer:
+ 
+Neither the Agricultural System Research Unit - USDA (ASR - formerly Great Plains System Research Unit) nor Colorado State University nor any of its employees makes any warranty or assumes any legal liability or responsibility for the accuracy, completeness, or usefulness of any information, apparatus, product, or process disclosed, or represents that its use would not infringe upon privately owned rights.  Reference to any special commercial products, process, or service by tradename, trademark, manufacturer, or otherwise, does not necessarily constitute or imply endorsement, recommendation, or favoring by the ASR or CSU.  The views and opinions of the authors do not necessarily state or reflect those of ASR or CSU and shall not be used for advertising or product endorsement.
+ 
+For further development of Daycent please contact (cindy.keough@colostate.edu or century@nrel.colostate.edu).
+

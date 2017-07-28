@@ -1,0 +1,9 @@
+# This module is provided as @CMAKE_PROJECT_NAME@_USE_FILE by @CMAKE_PROJECT_NAME@Config.cmake
+# It can be included in a project to load the needed compiler and linker settings to use @CMAKE_PROJECT_NAME@
+
+if( NOT @CMAKE_PROJECT_NAME@_USE_FILE_INCLUDED )
+    set( @CMAKE_PROJECT_NAME@_USE_FILE_INCLUDED 1 )
+
+    # Add include directories needed to use @CMAKE_PROJECT_NAME@
+    include_directories( ${@CMAKE_PROJECT_NAME@_INCLUDE_DIRS} )
+endif()

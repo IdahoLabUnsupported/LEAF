@@ -1,0 +1,145 @@
+<!--
+ External DTD for validating XML file of dependencies of functions used by Rusle2.
+ The following DOCTYPE entry is only used in an internal DTD.
+ <!DOCTYPE Catalog [
+-->
+	<!-- ******************************************************************* -->
+	<!-- This DTD largely follows the same schema as used by the Rusle2 catalog itself.
+	     The <Fn> tag has been changed to <CalcFn> for clarity. -->
+
+	<!-- The root node of the dependencies file. -->
+	<!ELEMENT Catalog (CalcFns | InterlockFns | CleanupFns | ValidateFns)* >
+	<!ATTLIST Catalog Model		NMTOKEN	#IMPLIED
+					  Science	NMTOKEN	#IMPLIED >
+
+	<!ELEMENT CalcFns (CalcFn)* >
+	<!ATTLIST CalcFns >
+
+	<!ELEMENT InterlockFns (InterlockFn | Group)* >
+	<!ATTLIST InterlockFns >
+
+	<!ELEMENT CleanupFns (CleanupFn | Group)* >
+	<!ATTLIST CleanupFns >
+
+	<!ELEMENT ValidateFns (ValidateFn | Group)* >
+	<!ATTLIST ValidateFns >
+
+	<!-- ******************************************************************* -->
+
+	<!-- Each CalcFn entry lists all affecteds first, then all terms, then
+	  its params, which are obtained by FindOrCreate(). -->
+	<!ELEMENT CalcFn (Affecteds?, Terms?, Params?, InputFns?, Inputs?, OutputFns?, Outputs?) >
+	<!ATTLIST CalcFn
+		Name	CDATA	#REQUIRED
+	>
+
+	<!ELEMENT InterlockFn (Affecteds?, Terms?, Params?, InputFns?, Inputs?, OutputFns?, Outputs?) >
+	<!ATTLIST InterlockFn
+		Name	CDATA	#REQUIRED
+		Code	CDATA	 #IMPLIED
+	>
+
+	<!ELEMENT CleanupFn (Affecteds?, Terms?, Params?, Inputs?, Outputs?) >
+	<!ATTLIST CleanupFn
+		Name	CDATA	#REQUIRED
+		Code	CDATA	 #IMPLIED
+	>
+
+	<!ELEMENT ValidateFn (Affecteds?, Terms?, Params?, IntputFns?, Inputs?, OutputFns?, Outputs?) >
+	<!ATTLIST ValidateFn
+		Name	CDATA	#REQUIRED
+		Code	CDATA	 #IMPLIED
+	>
+
+	<!ELEMENT Group		ANY >
+	<!ATTLIST Group
+		Obj		CDATA	 #IMPLIED
+		Sub		CDATA	 #IMPLIED
+	>
+
+	<!-- ******************************************************************* -->
+
+	<!-- The list of all legal affecteds for a function. -->
+	<!ELEMENT Affecteds (Affected)* >
+	<!ATTLIST Affecteds
+		Count	CDATA	 #IMPLIED
+	>
+
+	<!ELEMENT Affected EMPTY >
+	<!ATTLIST Affected
+		Name	CDATA	#REQUIRED
+	>
+
+	<!-- The list of all legal terms for a function. -->
+	<!ELEMENT Terms (Term)* >
+	<!ATTLIST Terms
+		Count	CDATA	 #IMPLIED
+	>
+
+	<!ELEMENT Term EMPTY >
+	<!ATTLIST Term
+		Name	CDATA	#REQUIRED
+		Write	CDATA	 #IMPLIED
+	>
+
+	<!-- The list of all legal params for a function. -->
+	<!ELEMENT Params (Param)* >
+	<!ATTLIST Params
+		Count	CDATA	 #IMPLIED
+	>
+
+	<!ELEMENT Param EMPTY>
+	<!ATTLIST Param
+		Name	NMTOKEN	#REQUIRED
+	>
+
+	<!-- The list of all inputs for a function. -->
+	<!ELEMENT InputFns (InputFn)* >
+	<!ATTLIST InputFns
+		Count	CDATA	 #IMPLIED
+	>
+
+	<!ELEMENT InputFn EMPTY>
+	<!ATTLIST InputFn
+		Name	NMTOKEN	#REQUIRED
+	>
+
+	<!-- The list of all inputs for a function. -->
+	<!ELEMENT Inputs (Input)* >
+	<!ATTLIST Inputs
+		Count	CDATA	 #IMPLIED
+	>
+
+	<!ELEMENT Input EMPTY>
+	<!ATTLIST Input
+		Name	NMTOKEN	#REQUIRED
+	>
+
+	<!-- The list of all outputs for a function. -->
+	<!ELEMENT OutputFns (OutputFn)* >
+	<!ATTLIST OutputFns
+		Count	CDATA	 #IMPLIED
+	>
+
+	<!ELEMENT OutputFn EMPTY>
+	<!ATTLIST OutputFn
+		Name	NMTOKEN	#REQUIRED
+	>
+
+	<!-- The list of all outputs for a function. -->
+	<!ELEMENT Outputs (Output)* >
+	<!ATTLIST Outputs
+		Count	CDATA	 #IMPLIED
+	>
+
+	<!ELEMENT Output EMPTY>
+	<!ATTLIST Output
+		Name	NMTOKEN	#REQUIRED
+	>
+
+	<!-- ******************************************************************* -->
+
+<!--
+ The following close delimiter is only used in internal DTDs.
+ ]>
+-->

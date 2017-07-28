@@ -1,0 +1,84 @@
+*****************************************************************
+** Translation string (title) map for Rusle2 (www.rusle2.org). **
+** This file is part of the Rusle2 distribution.               **
+** See "Rusle2 Translation Titles.rtf" for more information.   **
+*****************************************************************
+
+** This file contains titles which appear in the DataDLL.
+
+************************************************************************************
+**	Messages used by the datadll.
+**	Use with fns Message("KEY") or GetTitle("KEY").
+**	Keys start with a standard 3-letter prefix, then are followed by a standard
+**	  category name, then a description.
+**
+**	The 4 standard prefixes correspond to the icon type in a message box:
+**  All datadll strings are followed by DATADLL_ (Ex: ERR_DATADLL_...)
+**	ERR_		Error message box.
+**	QST_		Question message box.
+**	INF_		Info message box.
+**	WRN_		Warning message box.
+**
+**	STR_		Translatable string not directly in a message box.
+**
+**	Some critical messages are hard-coded into a table in Rusle2 to guarantee that
+**	  they are available at runtime. Search on ERR_FILE_MISSING to find the list.
+**
+************************************************************************************
+
+
+******* Messages: Admin ****************
+
+WRN_DATADLL_ADMIN_SELECT_TYPE	You need to select a table type from the dropdown.
+
+
+******* Messages: App/Frame ************
+
+******* Messages: Change Dialog ********
+
+QST_DATADLL_CHANGEDLG_CONFIRM_DELETE_DIR	Confirm Directory Delete.\nAre you sure you want to delete '%s' and all its contents?
+ERR_DATADLL_CHANGEDLG_DELETE_READONLY	Cannot Delete. One or more objects are read-only.
+ERR_DATADLL_CHANGEDLG_DELETE_READONLYDB	Cannot Delete. This is a read-only or locked database.
+ERR_DATADLL_CHANGEDLG_RENAME_PROTECTED	Cannot Move Folder.\nFolder contains one or more objects whose paths are protected.
+
+
+******* Messages: Database *************
+
+******* Messages: Import ***************
+
+WRN_DATADLL_IMPORT_READONLY_FILES	Warning: You are importing files which you will not be able to edit after importing.\nTo be able to edit these files, either import them through a subfolder you are able to edit in using the 'Import to new folder' control below, or copy the files after importing.\n\n[OK]	Continue import\n[Cancel]	Cancel import
+
+
+******* Messages: Dates ****************
+
+******* Messages: Dialogs (misc) *******
+
+STR_DATADLL_OPENDLG_CAPTION	Open
+STR_DATADLL_OPENDLG_DIRTEXT	Look &in:
+STR_DATADLL_OPENDLG_OKAY	&Open
+STR_DATADLL_OPENDLG_TYPETEXT	File &type:
+STR_DATADLL_OPENDLG_USELAST	Open to &last directory
+
+STR_DATADLL_SAVEDLG_CAPTION	Save As
+STR_DATADLL_SAVEDLG_DIRTEXT	Save &in:
+STR_DATADLL_SAVEDLG_OKAY	&Save
+
+******* Messages: Files/Dirs ***********
+
+ERR_DATADLL_FILENAME_INVALID_CHAR	Rusle2 internal filenames are not allowed to contain any of the following characters:\n_ % ' < >
+ERR_DATADLL_FILENAME_TRAILING_BACKSLASH	Rusle2 filenames are not allowed to end with a backslash (\).
+ERR_DATADLL_FILENAME_TRAILING_BLANKS	Rusle2 filenames are not allowed to end with blank characters.
+ERR_DATADLL_FILENAME_INVALID_LENGTH	Rusle2 filenames may not be empty, and may not be longer than 255 characters.
+ERR_DATADLL_FILENAME_INVALID_SEPARATOR	Rusle2 filename components are not allowed to contain a backslash (\).
+
+******* Messages: MosesFileSystem ******
+
+QST_DATADLL_CONVERT_REPLACE	Replace database file '%s'?
+
+******* Messages: SQLite datastore *****
+
+ERR_SQLITE_BUSY	The database is unavailable because it is busy.\nThe database may be in use by another user if it is on a shared drive.\nThe current operation will now fail.
+QRY_SQLITE_BUSY	The database is unavailable because it is busy.\nThe database may be in use by another user if it is on a shared drive.\nDo you want to continue waiting? If NO, the current operation will fail.
+
+******* Messages: Permissions **********
+

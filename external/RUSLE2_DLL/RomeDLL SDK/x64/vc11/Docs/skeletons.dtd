@@ -1,0 +1,72 @@
+<!--
+ External DTD for validating XML management skeleton (.SKEL) files exported by Rusle2.
+ This is a common file format used by NRCS for management information.
+ This can be added to an exported skeleton file by adding the line
+    <!DOCTYPE management SYSTEM "(path to this file)">
+-->
+
+<!-- The root element
+  "ver" is the version of this DTD used to generate the skeleton file.
+        1.0  The base version
+		1.1  Introduced optional <irrigation_dates> element
+		     Note: this version is backwards compatible with 1.0
+  "prog" is the program used to generate the skeleton file.
+     It is 'RUSLE2' for the Rusle2 application.
+-->
+<!ELEMENT management (name, duration, operations) >
+<!ATTLIST management
+    ver  CDATA #REQUIRED
+    prog CDATA #REQUIRED
+>
+
+<!-- The duration of the management.
+  This is a positive integer for the number of years.
+-->
+<!ELEMENT duration (#PCDATA)* >
+
+<!-- The list of operations in the management.
+-->
+<!ELEMENT operations (op+ irrigation_dates?) >
+
+<!ELEMENT op (date, name, veg?) >
+
+<!-- The [start] date of the operation.
+  This is exported by Ruse2 in mm/dd/yy format.
+  Note that these are "simulation dates", which generally start with year 0 or year 1.
+  These are not generally "real" calendar dates.
+-->
+<!ELEMENT date (#PCDATA)* >
+
+<!-- A vegetation associated with an operation.
+-->
+<!ELEMENT veg (name) >
+
+<!-- A name of a management or an operation.
+  These are encoded using XML character entities:
+	" ==> &quot;
+	& ==> &amp;	required for safe decoding
+	< ==> &lt;
+	> ==> &gt;
+	\ ==> \		not encoded
+	| ==> &#x7C;
+	/ ==> &#x2F;
+	: ==> &#x3A;
+	* ==> &#x2A;
+	? ==> &#x3F;
+  The management name is the name Rusle2 uses internally.
+  An operation name is the name of a Rusle2 operation file.
+-->
+<!ELEMENT name (#PCDATA)* >
+
+<!-- ************************************************************ -->
+
+<!-- Irrigation information
+  This was introduced with skeleton format 1.1.
+  This information is optional, so format 1.1 is backwards compatible with 1.0.
+  -->
+<!ELEMENT irrigation_dates (irrig_start_date, irrig_end_date)+ >
+
+<!ELEMENT irrig_start_date (#PCDATA)* >
+<!ELEMENT irrig_end_date   (#PCDATA)* >
+
+<!-- ************************************************************ -->

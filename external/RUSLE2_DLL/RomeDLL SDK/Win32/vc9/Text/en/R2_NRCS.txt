@@ -1,0 +1,22 @@
+*****************************************************************
+** Translation string (title) map for Rusle2 (www.rusle2.org). **
+** This file is part of the Rusle2 distribution.               **
+** See "Rusle2 Translation Titles.rtf" for more information.   **
+*****************************************************************
+
+AVERAGE_ANNUAL_SOIL_LOSS1	Soil Loss Values
+TRACK_RESIDUE_AND_CANOPY	Track Residue and Canopy
+DIVERSION_AND_TERRACE_LOCATION1	Diversion and Terrace Location
+INFORMATION1	Information
+MISC._OUTPUT	Misc. Output
+TRACK_RESIDUE,_BIOMASS_AND_CANOPY	Track Residue, Biomass, and Canopy
+TRACK_RESIDUE_CANOPY_AND_BIOMASS	Track Residue, Canopy, and Biomass
+
+HI_CONST_COMPOSITE_VALUES	STEP 5. Composite Segment Output
+HI_CONST_EROSION_BY_YEAR	STEP 6 Erosion by Year Output
+HI_CONST_MANAGE_FOLDER	STEP 4a. Describe Slope Management Practices
+HI_CONST_LOCATION	STEP 1. Set Location
+HI_CONST_SLOPE_INFO	Info
+HI_CONST_SOIL_FOLDER	STEP 2. Select Soil
+HI_CONST_STEP_4B:__SELECT_SLOPE_PRACTICES	STEP 4b. Select Slope Practices
+HI_CONST_TOPO	STEP 3. Set Topography

@@ -1,0 +1,78 @@
+** Titles file used to control what unit tests run.
+** See documentation of function UnitTestCanRun() in the source code.
+** This configuration file is for use by developers only.
+** It is not needed during the normal use of the Rusle2 application and DLL.
+** This file can be omitted from a normal Rusle2 application or DLL installation.
+
+** Add titles for test objects and parameters to suppress warnings.
+** These are created by the unit test code only, so lack normal title strings.
+TEST	TEST
+UNITTEST_DATE	UNITTEST_DATE
+UNITTEST_FLOAT	UNITTEST_FLOAT
+UNITTEST_PTRATTR	UNITTEST_PTRATTR
+UNITTEST_REMOTE	UNITTEST_REMOTE
+
+** If key "UnitTests:CanRun" has a 0 value, no tests will run.
+** A default value of 1 is hard-coded into the source.
+** Uncomment this line to turn off all unit testing.
+*UnitTests:CanRun	0
+
+** The value "UnitTests:Default" provides a default probability for a
+**   test to run if no value is explicitly declared for it.
+** It should be a floating-point value in the range [0, 1] inclusive.
+** This can be used to decrease the startup overhead of unit tests if it becomes too costly,
+**   without turning them off entirely, or turning off a fixed set.
+*UnitTests:Default	0.1
+
+** Run some specific unit tests with fixed probabilities.
+** This overrides the default probability "UnitTests:Default" above.
+** These do not have an effect if "UnitTests:CanRun" turns off unit tests entirely.
+CDate::UnitTest	1
+CFloat::UnitTest	1
+CRemoteAttr::UnitTest	1
+UnitTestRomeCode	0
+UnitTestComboCode	1
+
+** Turn off tests which are currently broken.
+** Because titles are loaded in order, from the top of the file,
+**   this will override any probabilities set above.
+*UnitTestAttrCode	0
+*UnitTestStringCode	0
+*UnitTestXmlStringCode	0
+
+** Turn off tests which change access levels.
+** Changing access levels during unit tests can permanently destroy some menu items.
+** This is due to a bug in our menu recreation code, which is not yet fixed.
+DataDLL	0
+CAccesses::UnitTest	0
+
+**************************************************
+************ Configuration Settings **************
+**************************************************
+
+** Turn off use of BadFileMap code.
+App.Files.BadFileMapEnabled	0
+
+** Change the location of the Session directory from a Win32 Temp directory
+**   to a relative directory under the Rusle2 root directory.
+*DirPaths:Session	Session
+
+** Turn on additional logging of engine behavior.
+** This is more verbose than is usually required, and tends to flood the "commands.xml" log file.
+** If this is turned on you may want to increase the size limit "App.LogFiles.MaxSize.LOG_HIST" below.
+*App.Engine.Logging	1
+
+** Set the default size for log files.
+** If this is <= 0, no loggging will be done unless a size is explicitly set for that file.
+** These settings will not affect things until titles have been loaded.
+*App.LogFiles.MaxSize.DEFAULT	100000
+
+** Set the maximum log file size for individual log files
+** The LOG_HIST file needs to be significantly larger than the other files
+**   unless log file filtering is being done.
+*App.LogFiles.MaxSize.LOG_ERROR	100000
+*App.LogFiles.MaxSize.LOG_HIST	1000000
+*App.LogFiles.MaxSize.LOG_MSSG	100000
+*App.LogFiles.MaxSize.LOG_STACK	100000
+*App.LogFiles.MaxSize.LOG_SHELL	100000
+

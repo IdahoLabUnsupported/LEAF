@@ -1,0 +1,488 @@
+*****************************************************************
+** Translation string (title) map for Rusle2 (www.rusle2.org). **
+** This file is part of the Rusle2 distribution.               **
+** See "Rusle2 Translation Titles.rtf" for more information.   **
+*****************************************************************
+
+** This file contains titles which appear only in the application.
+** - menu strings
+** - titlebar strings
+** - dialog strings
+
+
+************************************************************************************
+** Menu strings
+
+***************
+** File menu **
+***************
+ID_FILE_NEW	Create a new document
+ID_FILE_NEW_TT	New
+ID_FILE_OPEN	Open an existing object
+ID_FILE_OPEN_TT	Open
+ID_FILE_CLOSE	Close the active object
+ID_FILE_CLOSE_TT	Close
+ID_FILE_SAVE	Save the current object
+ID_FILE_SAVE_TT	Save Ctrl+S
+ID_FILE_SAVE_AS	Save the current object with a new name
+ID_FILE_SAVE_AS_TT	Save As
+ID_FILE_PAGE_SETUP	Change the printing options
+ID_FILE_PAGE_SETUP_TT	Page Setup
+ID_FILE_PRINT_SETUP	Change the printer and printing options
+ID_FILE_PRINT_SETUP_TT	Print Setup
+ID_FILE_PRINT	Print contents of current view (unformatted)
+ID_FILE_PRINT_TT	Print
+ID_FILE_PRINT_PREVIEW	Print Preview
+ID_FILE_PRINT_PREVIEW_TT	Print Preview
+ID_FILE_CLONE	Duplicate the current object
+ID_FILE_CLONE_TT	Duplicate
+ID_FILE_IMPORT	Import database, templates and/or access levels
+
+*******************
+** Database menu **
+*******************
+
+***************
+** Edit menu **
+***************
+ID_EDIT_CLEAR	Erase the selection
+ID_EDIT_CLEAR_TT	Erase
+ID_EDIT_CLEAR_ALL	Erase everything
+ID_EDIT_CLEAR_ALL_TT	Erase All
+ID_EDIT_COPY	Copy
+ID_EDIT_COPY_TT	Copy Ctrl+C
+ID_EDIT_COPY:*MENU	&Copy\tCtrl+C
+ID_EDIT_CUT	Cut
+ID_EDIT_CUT_TT	Cut Ctrl+X
+ID_EDIT_CUT:*MENU	Cu&t\tCtrl+X
+ID_EDIT_FIND	Find the specified text
+ID_EDIT_FIND_TT	Find
+ID_EDIT_PASTE	Insert
+ID_EDIT_PASTE_TT	Paste Ctrl+V
+ID_EDIT_PASTE:*MENU	&Paste\tCtrl+V
+ID_EDIT_REPEAT	Repeat the last action
+ID_EDIT_REPEAT_TT	Repeat
+ID_EDIT_REPLACE	Replace specific text with different text
+ID_EDIT_REPLACE_TT	Replace
+ID_EDIT_SELECT_ALL	Select the entire document
+ID_EDIT_SELECT_ALL_TT	Select All
+ID_EDIT_UNDO	Undo the last action
+ID_EDIT_UNDO_TT	Undo Ctrl+Z
+ID_EDIT_REDO	Redo the previously undone action
+ID_EDIT_REDO_TT	Redo Ctrl+Y
+
+***************
+** View menu **
+***************
+ID_VIEW_TOOLBAR	Show or hide the toolbar
+ID_VIEW_TOOLBAR_TT	Toggle ToolBar
+ID_VIEW_STATUS_BAR	Show or hide the status bar
+ID_VIEW_STATUS_BAR_TT	Toggle StatusBar
+
+******************
+** Options menu **
+******************
+OPTIONS_UNITS_SI	Use international units
+OPTIONS_UNITS_US	Use United States customary units
+OPTIONS_DEFAULTS	When the program starts, what do you want to see?
+OPTIONS_SCREEN_COLORS	Base screen graphics on attributes
+OPTIONS_SCREEN_COLORS_TT	Attribute-based graphics
+OPTIONS_COMPUTATION	Options related to recalculation, limits of confidence
+OPTIONS_SEG	Show Model pieces
+OPTIONS_SEG_TT	Model pieces
+
+*****************
+** Window menu **
+*****************
+ID_NEXT_PANE	Switch to the next window pane
+ID_NEXT_PANE_TT	Next Pane
+ID_PREV_PANE	Switch back to the previous window pane
+ID_PREV_PANE_TT	Previous Pane
+***
+ID_WINDOW_NEW	Open another window for the active document
+ID_WINDOW_NEW_TT	New Window
+ID_WINDOW_ARRANGE	Arrange icons at the bottom of the window
+ID_WINDOW_ARRANGE_TT	Arrange Icons
+ID_WINDOW_CASCADE	Arrange windows so they overlap
+ID_WINDOW_CASCADE_TT	Cascade Windows
+ID_WINDOW_TILE_HORZ	Arrange windows as non-overlapping tiles
+ID_WINDOW_TILE_HORZ_TT	Tile Windows
+ID_WINDOW_TILE_VERT	Arrange windows as non-overlapping tiles
+ID_WINDOW_TILE_VERT_TT	Tile Windows
+ID_WINDOW_SPLIT	Split the active window into panes
+ID_WINDOW_SPLIT_TT	Split
+ID_WINDOW_CLOSEALL	Close all objects
+ID_WINDOW_CLOSEALL_TT	Close all objects
+
+***************
+** Help menu **
+***************
+ID_APP_ABOUT	Display program information, version number and copyright
+ID_APP_ABOUT_TT	About
+ID_APP_EXIT	Quit the application; prompts to save objects
+ID_APP_EXIT_TT	Exit
+ID_HELP_INDEX	Opens Help
+ID_HELP_INDEX_TT	Help Topics
+ID_HELP_FINDER	Show the online user's manual
+ID_HELP_FINDER_TT	User's manual
+ID_HELP_USING	Display instructions about how to use help
+ID_HELP_USING_TT	Help
+ID_CONTEXT_HELP	Display help for clicked on buttons, menus and windows
+ID_CONTEXT_HELP_TT	Help
+ID_HELP	Display help for current task or command
+ID_HELP_TT	Help
+ID_HELP_WEBSITE	Go to the RUSLE2 web site
+VIEW_WIZARD	Choose a user template and file to open
+ID_HELP_BUGREPORT	Email an error report to the Rusle2 developers
+ID_TITLES_RELOAD	Titles Reload (Debug)
+ID_TITLES_DUMP	Titles Dump (Debug)
+
+** Attr context menu **
+ID_HIGHLIGHT	Highlight
+ID_DISABLE	Disable
+ID_DIMENSION	Dimension
+* see CMenuHandler::CreateMenu() and related fns for more to add.
+
+************************************************************************************
+** Toolbar strings
+
+ID_DATA_SOIL	Open a new/existing soil
+ID_DATA_SOIL_TT	Open soil...
+ID_DATA_OPERATION	Open a new/existing operation
+ID_DATA_OPERATION_TT	Open operation...
+ID_DATA_VEGETATION	Open a new/existing vegetation
+ID_DATA_VEGETATION_TT	Open vegetation...
+ID_DATA_RESIDUE	Open a new/existing cover/residue material
+ID_DATA_RESIDUE_TT	Open cover/residue material
+ID_DATA_SLOPE	Open a new/existing profile
+ID_DATA_SLOPE_TT	Open profile...
+ID_DATA_CLIMATE	Open a new/existing climate
+ID_DATA_CLIMATE_TT	Open climate...
+ID_DATA_MANAGEMENT	Open a new/existing management
+ID_DATA_MANAGEMENT_TT	Open management...
+ID_DATA_EI	Open a new/existing storm erosivity
+ID_DATA_EI_TT	Open storm erosivity...
+ID_DATA_WORKSHEET	Open a new or existing worksheet
+ID_DATA_WORKSHEET_TT	Open worksheet...
+ID_DATA_CONTOUR	Open a new/existing contouring system
+ID_DATA_CONTOUR_TT	Open contouring...
+ID_DATA_STRIP_BARRIER	Open a new/existing strip/barrier system
+ID_DATA_STRIP_BARRIER_TT	Open strip-barrier...
+ID_DATA_CHANNEL	Select a channel type
+ID_DATA_CHANNEL_TT	Open channel...
+ID_DATA_HYD_ELEMENT	Open a new/existing channel/impoundment
+ID_DATA_HYD_ELEMENT_TT	Open channel/impoundment...
+ID_DATA_HYD_ELEMENT_SYSTEM	Open a new/existing channel-impoundment system
+ID_DATA_IRRIGATION_SYSTEM	Open a new/existing irrigation system
+ID_DATA_IRRIGATION_SYSTEM_TT	Open irrigation system...
+ID_DATA_PERMEABLE_BARRIER	Open a new/existing permeable barrier description
+ID_DATA_PERMEABLE_BARRIER_TT	Open permeable barrier...
+ID_DATA_FUEL	Open a new/existing fuel description
+ID_DATA_FUEL_TT	Open fuel...
+ID_DATA_HYD_ELEMENT_SYSTEM_TT	Open channel-impoundment system...
+ID_DATA_HYD_ELEMENT_FLOW_PATH	Open a new/existing hyd. element flow path
+ID_DATA_HYD_ELEMENT_FLOW_PATH_TT	Open hyd. element flow path
+ID_DATA_TILE_SYSTEM	Open deep soil drain system
+ID_DATA_TILE_SYSTEM_TT	Open description for deep soil drainage system
+ID_DATA_PLAN	Open plan description
+ID_DATA_PLAN_TT	Open plan...
+ID_DATA_COEFF	Set global coefficient values
+ID_DATA_COEFF_TT	Set global coefficient values
+ID_DATA_LIMITS	Set limits
+ID_DATA_LIMITS_TT	Set limits
+ID_DATA_SIM	Open a new/existing simulation description
+ID_DATA_SIM_TT	Open simulation...
+ID_DATA_CMB	Open a new/existing combo description
+ID_DATA_CMB_TT	Open combo...
+ID_DATA_CEL	Open a new/existing cell description
+ID_DATA_CEL_TT	Open cell...
+ID_DATA_MIO	Open a new/existing man instance description
+ID_DATA_MIO_TT	Open man instance...
+ID_DATA_SMC	Open a new/existing simulation control
+ID_DATA_SMC_TT	Open simulation control...
+ID_DATA_MSO	Open a new/existing man set
+ID_DATA_MSO_TT	Open man set control...
+
+ID_LOAD_PREFERENCE	Load template...
+ID_LOAD_PREFERENCE_TT	Load template...
+ID_EDIT_PREFERENCE	Edit current template...
+ID_EDIT_PREFERENCE_TT	Edit current template...
+ID_SAVE_PREFERENCE	Save current template as...
+ID_SAVE_PREFERENCE_TT	Save current template as...
+
+ID_GROUP_COMPARE	Open a new/existing slope comparison
+ID_GROUP_COMPARE_TT	Open comparison...
+ID_GROUP_TERRACE	Open a new/existing terrace
+ID_GROUP_TERRACE_TT	Open terrace...
+ID_GROUP_WATERSHED	Open a new/existing watershed
+ID_GROUP_WATERSHED_TT	Open watershed...
+
+ID_BUTTON32781	Remove the selection
+ID_BUTTON32781_TT	Remove
+ID_BUTTON32782	Divide the selected piece in half
+ID_BUTTON32782_TT	Divide
+ID_BUTTON32783	Divide the selection
+ID_BUTTON32783_TT	Divide
+ID_ZOOM	Enlarge or shrink the current view
+ID_ZOOM_TT	Zoom
+ID_FOLDER_MANAGE	Manage folders
+ID_FOLDER_MANAGE_TT	Manage folders
+
+ID_AVG_SLOPE_LINE	Show average slope line
+ID_AVG_SLOPE_LINE_TT	Avg. slope line
+
+
+*************  SLOPE GRAPHIC  ***************
+STR_ADD_BREAK	Add break
+STR_ERASE_BREAK	Erase break
+STR_MANAGE	Manage
+STR_SOIL	Soil
+STR_TOPO	Topo
+
+
+**************** STANDARD FOLDERS **************	
+ADDITIONAL_RESULT	Additional Results
+GENERAL	General
+INFO	Info
+Info	Info
+RESULTS	Results
+
+
+****************** DIALOGS *****************************
+** TODO: move these into sections, using standard
+** naming conventions for controls.
+
+** Dialog: (General purpose strings) *******************
+DLG_STR_OK	OK
+DLG_STR_AMP_SAVE	&Save
+DLG_STR_SAVE_AMP_AS	Save &As...
+DLG_STR_CANCEL	Cancel
+DLG_STR_AMP_CANCEL	&Cancel
+DLG_STR_DELETE	Delete
+DLG_STR_AMP_DELETE	&Delete
+DLG_STR_CLOSE	Close
+DLG_STR_AMP_YES	&Yes
+DLG_STR_AMP_NO	&No
+DLG_STR_YES_AMP_ALL	Yes &All
+DLG_STR_AMP_HELP	&Help
+
+** Dialog: Access ***************************************
+DLG_STR_ACCESSDLG_TITLE	Edit Access Group
+DLG_STR_LBL_TOP	Since seeing more of the model than required can overwhelm a user, and letting them edit parts of the model that they don't understand can result in inaccurate values, you can adjust access to objects and their parameters:
+DLG_STR_CURRENT_ACCESS	&Current access
+DLG_STR_USE_STARTUP_ACCESS	&Use this access on startup
+DLG_STR_LETS	Lets the user
+DLG_STR_LBL_HIDESEE	Hide See Edit
+DLG_STR_OBJECTS	&Objects*
+DLG_STR_PARAMS	&Parameters
+DLG_STR_CLICK_FOR_LIST	* Click on an object for a list of its parameters.
+DLG_STR_TXT_LIST	&Text Listing
+
+** Dialog: Context *************************************
+STR_CHILDREN	Children:
+STR_CONTRIBUTING_TERMS	Contributing terms:
+STR_DIMENSIONS	Dimensions:
+STR_SPATIAL_DEPENDENTS	Spatial dependents:
+STR_AFFECTED_PARAMETERS	Affected parameters:
+STR_FN_DEPS	Fn deps:
+	Default File
+STR_FILE	File:
+
+****************** Template Dialog *****************************
+DLG_STR_TEMPLATE_DIALOG_TITLE	Edit User Template
+DLG_STR_USE_STARTUP_TEMPLATE	Use this template on &startup
+DLG_STR_HIGHLIGHT_TAB	&Highlight the selected tab in each view
+DLG_STR_FONT_SIZE	&Font size in views
+DLG_STR_ADJUST_APPEARANCE	Adjust the appearance of views, the names and contents of folders, and the visibility of parameters by right clicking in a particular view.
+DLG_STR_GENERAL_APPEARANCE	General appearance
+DLG_STR_SHOW_CALENDAR	&Show calendar dropdown for dates
+STR_DEFAULT_FILE	Default File
+****
+DLG_STR_EXPORT_DIALOG_TITLE	Export
+DLG_STR_EXPORT_WHAT	What would you like to export?
+DLG_STR_DB_RECORDS	&Database records as:
+DLG_STR_OLD_FORMAT	&Old format
+DLG_STR_ACCESS_LEVEL	&Access level:
+DLG_STR_WHERE_PUT	Where would you like to put it?
+DLG_STR_BROWSE	Browse...
+****
+DLG_STR_IMPORT_DIALOG_TITLE	Import
+DLG_STR_FROM_DIRECTORY	From which directory would you like to import?
+DLG_STR_STATIC	Static
+DLG_STR_IMPORT_WHAT	What would you like to import?
+DLG_STR_TEMPLATES	&Template(s)
+DLG_STR_ACCESS_LEVELS	&Access level(s)
+****
+DLG_STR_SAVE_REP_CHECK	Saving a file under a new name.
+DLG_STR_DONT_ASK_AGAIN	&Don't ask me this again
+DLG_STR_REPLACE_REFERENCES	&Replace all references to the old file with references to this new one
+DLG_STR_LEAVE_REFERENCES	&Leave the references to the old file in place
+DLG_STR_REPLACE_THIS_REFERENCE	Replace &only the reference from where you drilled into the old file with a reference to this new one
+DLG_STR_LBL_SAVE_NEW_NAME	You are saving a file under a new name.  If this file is used within another (for example, a vegetation referred to within a management), you must tell the program what to do with the reference to the old file.
+****
+DLG_STR_SHOWONCE_DIALOG	Dialog
+DLG_STR_DONT_SHOW	&Don't show this dialog again
+****
+DLG_STR_INSERT_CONTROL	Insert control
+DLG_STR_SELECT_ATTR	&Select an attr to add a control for:
+DLG_STR_TXT_SELECT_TYPE	Select &control type:
+DLG_STR_AMP_UP	&Up
+DLG_STR_AMP_DOWN	&Dn
+DLG_STR_TYPE	Type:
+****
+DLG_STR_BUGREPORT_TITLE	Email a bug report
+DLG_STR_LBL_TO	&To: 
+DLG_STR_LBL_SUBJ	Sub&j:
+DLG_STR_COMMENTS	&Comments: (optional)
+DLG_STR_AMP_SEND	&Send
+DLG_STR_AMP_USER	&User:
+DLG_STR_INCLUDE_INFO	Rusle2 will automatically include debugging information with this email.
+****
+DLG_STR_NAME_DLG	Enter Name
+DLG_STR_NEW_NAME	Enter a new name:
+DLG_STR_RENAME_TAB_PROMPT	Enter a new name or title for this tab.\nOld name: %s\nOld title:  %s
+DLG_STR_RENAME_TAB_TITLE	Rename a tab
+****
+DLG_STR_DLG_BAR	Bar
+DLG_STR_AUTO	Auto update
+DLG_STR_CALC	Calc
+****
+DLG_STR_LAUNCH_HELP	Launching help system...this may take a moment.
+****
+DLG_STR_WIZARD	Introduction
+DLG_STR_WHERE_START	1. Where would you like to start?
+DLG_STR_WORKSHEET	&Worksheet
+DLG_STR_PROFILE	&Profile
+DLG_STR_CLIMATE	&Climate
+DLG_STR_STORM_EROS	Storm &Erosivity
+DLG_STR_SOIL	&Soil
+DLG_STR_MANAGEMENT	&Management
+DLG_STR_OPERATION	&Operation
+DLG_STR_VEGETATION	&Vegetation
+DLG_STR_RESIDUE	&Residue
+DLG_STR_WHICH_TEMPLATE	2. Which template would you like to use?
+DLG_STR_AFTER_CLICK_OK	3. After clicking OK, you will be prompted to open a view.
+DLG_STR_CHANGE_VALUES	4. Change values in the view to match your situation. 
+DLG_STR_AS_CHANGES	5. As you make changes, the model recalculates.  Save if you wish.
+****
+DLG_STR_IDD_STATISTICS	Statistics
+DLG_STR_MEAN	Mean
+DLG_STR_STD_DEV	Std. Dev.
+DLG_STR_VARIABILITY	Variability
+DLG_STR_MINIMUM	Minimum
+DLG_STR_MAXIMUM	Maximum
+DLG_STR_SUM	Sum
+DLG_STR_STATIC	Static
+DLG_STR_NUM_NONZERO	non-zero
+DLG_STR_NUM	Num
+
+****
+DLG_STR_IDD_PAGE_STARTUP	Startup
+DLG_STR_USE_ON_STARTUP	&Use this template on startup
+DLG_STR_CHOOSE_FILE	Choose a file to open on startup:
+DLG_STR_NONE	&None
+DLG_STR_CHOOSE_TYPE	&Choose type from dialog
+DLG_STR_FILE_TYPE	&File type: 
+DLG_STR_USER_DEFAULT	User &default: %s
+DLG_STR_LAST_FILE	&Last file: %s
+DLG_STR_NEW_FILE	Ne&w file
+****
+DLG_STR_IDD_INSERT_CONTROL	Insert control
+DLG_STR_TYPE	Type:
+****
+DLG_STR_IDD_PAGE_GENERAL	General
+DLG_STR_HIGHLIGHT_SELECTED_TAB	&Highlight the selected tab in each view
+DLG_STR_FONT_SIZE	&Font size in views
+DLG_STR_ADJUST_APPEARANCE	Adjust the appearance of views, the names and contents of folders, and the visibility of parameters by right clicking in a particular view.
+DLG_STR_GEN_APPEARANCE	General appearance
+DLG_STR_SHOW_CALENDAR_DROPDOWN	&Show calendar dropdown for dates
+****
+DLG_STR_IDD_PAGE_DEFAULTS	Default Files
+****
+DLG_STR_IDD_PAGE_BITMAPS	Bitmap Files
+STR_BITMAP_FILE	Bitmap File
+STR_LABEL_BITMAP_FILE	&Bitmap File:
+STR_LABEL_CHOOSE_BITMAP	&Object type to select a bitmap for:
+STR_LABEL_SELECT_BITMAP	Select bitmap: %s
+****
+DLG_STR_IDD_PERMS_GROUP	Edit Group Permissions
+DLG_STR_FOLDER	&Folder:
+DLG_STR_GROUP	&Group
+DLG_STR_READ	&Read (R)
+DLG_STR_WRITE	&Write (W)
+DLG_STR_CREATE	&Create (C)
+DLG_STR_DELETE	&Delete (D)
+****
+DLG_STR_IDD_PERMS_FOLDER	Directory Permissions
+DLG_STR_NAME	Name:
+DLG_STR_PERMISSIONS	&Permissions:
+DLG_STR_PERMS_TYPE	&Type of Permissions:
+DLG_STR_ADD	&Add...
+DLG_STR_REMOVE	&Remove
+****
+DLG_STR_IDD_PERMS_TABLE	Edit Permissions Table
+DLG_STR_SAVE_TEXT	&Save Text...
+DLG_STR_LOAD_TEXT	&Load Text...
+****
+DLG_STR_IDD_EXPORT_BEGIN	Begin Export
+DLG_STR_SELECT_EXPORT_FILES	Select files to export:
+DLG_STR_ACCESS_GROUPS	&Access groups
+DLG_STR_LEGACY_EXPORT	&Legacy export (as separate files)
+****
+DLG_STR_IDD_EXPORT_DATABASE	Export Database Records
+DLG_STR_EXDB_NAME	Na&me:
+DLG_STR_DB_FORMAT	Database &format:
+DLG_STR_STD_DB	&Standard database 
+DLG_STR_LEGACY_DB	&Legacy database 
+****
+DLG_STR_IDD_EXPORT_TEMPLATE	Export Templates
+DLG_STR_SELECT_TEMPLATES	&Select templates to export:
+****
+DLG_STR_IDD_EXPORT_END	Export to Disk
+DLG_STR_LBL_FINISH	Press [Finish] to complete the export process, or [Back] to change one of your choices.
+DLG_STR_FILENAME	&Filename:
+****
+DLG_STR_IDD_ABOUTBOX	About RUSLE2
+DLG_STR_BUILD_DATE	Build date: %s
+DLG_STR_SCIENCE_DATE	Science date: %s
+DLG_STR_RUSLE2_VERSION	Rusle2 version: %s
+****
+DLG_STR_IDD_EXPORT_ACCESS	Export Access Level
+DLG_STR_EX_SELECT_ACCESS_LEVELS	&Select access levels to export:
+****
+DLG_MESSAGEBOX_CAPTION	Rusle2
+DLG_MESSAGEBOX_CAPTION_DEBUG	Rusle2 (Debug)
+****
+STR_FILESET_EXPORT_TITLE	Export fileset
+STR_FILESET_OPEN_TITLE	Open fileset
+****
+
+************  Win32 Common Dialog Error Messages  ************
+IDS_DIALOGFAILURE	Creation of CD failed on call to DialogBox()
+IDS_STRUCTSIZE	Invalid structure size passed to CD
+IDS_INITIALIZATION	Failure initializing CD.  Possibly\n\r do to insufficient memory.
+IDS_NOTEMPLATE	Failure finding custom template for CD
+IDS_NOHINSTANCE	Instance handle not passed to CD
+IDS_LOADSTRFAILURE	Failure loading specified string
+IDS_FINDRESFAILURE	Failure finding specified resource
+IDS_LOADRESFAILURE	Failure loading specified resource
+IDS_LOCKRESFAILURE	Failure locking specified resource
+IDS_MEMALLOCFAILURE	Failure allocating memory for internal CD structure
+IDS_MEMLOCKFAILURE	Failure locking memory for internal CD structure
+IDS_NOHOOK	No hook function passed to CD but ENABLEHOOK\n\r was passed as a flag
+IDS_SETUPFAILURE	Failure setting up resources for CD
+IDS_PARSEFAILURE	Failure parsing strings in [devices]\n\rsection of WIN.INI
+IDS_RETDEFFAILURE	PD_RETURNDEFAULT flag was set but either the \n\rhDevMode or hDevNames field was nonzero
+IDS_LOADDRVFAILURE	Failure loading the printers device driver
+IDS_GETDEVMODEFAIL	The printer driver failed to initialize a DEVMODE data structure
+IDS_INITFAILURE	Print CD failed during initialization
+IDS_NODEVICES	No printer device drivers were found
+IDS_NODEFAULTPRN	No default printer was found
+IDS_DNDMMISMATCH	Data in DEVMODE contradicts data in DEVNAMES
+IDS_CREATEICFAILURE	Failure creating an IC
+IDS_PRINTERNOTFOUND	Printer not found
+IDS_NOFONTS	No fonts exist
+IDS_SUBCLASSFAILURE	Failure subclassing during initialization of CD
+IDS_INVALIDFILENAME	Invalid file name passed to FileOpen or FileSave
+IDS_BUFFERTOOSMALL	Buffer passed to CD too small to accomodate string
+

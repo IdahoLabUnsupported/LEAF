@@ -1,0 +1,114 @@
+<!--
+  External DTD for validating XML string arguments to Rusle2 MessageBox functions.
+  This DTD is for description purposes only, and isn't currently used to validate arguments.
+  It can be included in an XML string as
+    <!DOCTYPE MessageBox SYSTEM "message.dtd">
+  The filename of the DTD can be either an absolute or relative path.
+  Almost all of these elements are optional. This is because they may be used to pass in
+    partial collections of elements used to override existing arguments.
+  Most elements have default values.
+-->
+
+<!-- ======================================================================= -->
+
+
+<!-- This is the top-level element holding a message box description.
+  Contained elements are allowed to be contained in any order.
+  Alomst all elements are optional with standard defaults.
+  Note: #PCDATA MUST be listed FIRST.
+  -->
+<!ELEMENT MessageBox
+	(
+		ArgValue |
+		Assert |
+		Buttons |
+		Caption |
+		Icon |
+		ID |
+		Silent |
+		SubCaption |
+		Text
+	)*
+>
+
+
+<!-- This element contains arguments passed in for insertion into the string value
+  of the <Text> element.
+  They are currently substituted into format arguments %s, %1, %2.
+  *** NOT IMPLEMENTED as of 2005-02-16 ***
+  -->
+<!ELEMENT ArgValue (#PCDATA)
+>
+
+
+<!-- This is a Boolean flag for whether/not an assert should be triggered when this dialog
+  is shown in debug mode.
+  Default: FALSE
+  -->
+<!ELEMENT Assert (#PCDATA)
+>
+
+
+<!-- This is a string describing the button set displayed for the message box.
+  It only takes a limited set of string values:
+	MB_OK |
+	MB_OKCANCEL |
+	MB_ABORTRETRYIGNORE |
+	MB_YESNOCANCEL |
+	MB_YESNO |
+	MB_RETRYCANCEL
+  It is not possible to constrain the string to these legal values using a DTD.
+  Default: MB_OK
+  -->
+<!ELEMENT Buttons (#PCDATA)
+>
+
+
+<!-- This is the caption string shown for the message dialog.
+  -->
+<!ELEMENT Caption (#PCDATA)
+>
+
+
+<!-- This is a string describing the icon displayed for the message box.
+  It only takes a limited set of string values:
+	MB_ICONHAND | MB_ICONERROR | MB_ICONSTOP |
+	MB_ICONQUESTION |
+	MB_ICONEXCLAMATION | MB_ICONWARNING |
+	MB_ICONASTERISK | MB_ICONINFORMATION
+  Names listed on the same line are synonyms.
+  Default: MB_ICONINFORMATION
+  -->
+<!ELEMENT Icon (#PCDATA)
+>
+
+
+<!-- This is the ID string (Title key) for the text shown in the dialog.
+  This is the key used to look up a translation title.
+  -->
+<!ELEMENT ID (#PCDATA)
+>
+
+
+<!-- This is a Boolean flag for whether/not the message should be "silent".
+  A silent message is only logged to "commands.xml". No dialog is shown to the user.
+  Default: FALSE
+  -->
+<!ELEMENT Silent (#PCDATA)
+>
+
+
+<!-- This is the caption string shown for the message dialog.
+  Default: (empty)
+  -->
+<!ELEMENT SubCaption (#PCDATA)
+>
+
+
+<!-- This is the string (translation title) for the text shown in the dialog.
+  This is the title corresponding to the title key element <ID>.
+  -->
+<!ELEMENT Text (#PCDATA)
+>
+
+

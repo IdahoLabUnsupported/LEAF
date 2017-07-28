@@ -1,0 +1,904 @@
+*****************************************************************
+** Translation string (title) map for Rusle2 (www.rusle2.org). **
+** This file is part of the Rusle2 distribution.               **
+** See "Rusle2 Translation Titles.rtf" for more information.   **
+*****************************************************************
+
+** This file contains titles for core functionality which doesn't
+**   necessarily appear in the application.
+** - common titles
+** - units & dimensions
+** - message strings
+
+
+****************** COMMON TITLES ***************	
+MONTHLY	Monthly
+DAILY	Daily
+
+LOW	Low
+MEDIUM	Medium
+HIGH	High
+
+YES	Yes
+NO	No
+
+STR_EDIT	Edit
+STR_INTEGER	Integer
+STR_LOAD	Load
+STR_PICTURE	Picture
+STR_RUSLE2	Rusle2
+STR_SET	Set
+STR_SAVE	Save
+
+** Remote/Override attr indexes have names ATTRNAME:IDX
+** This title makes sure they have a title if one hasn't
+**  been added for them. The attr name will be stripped
+**  off by TitleFindAux().
+IDX	Index
+
+STR_MISSING_FOLDER_TITLE	Missing title for folder name:
+STR_CREATE	Create
+STR_DEFAULT	Default
+STR_DELETE	Delete
+STR_EDIT	Edit
+STR_GRAPHIC	Graphic
+STR_FOLDER	Folder
+STR_GROUP	Group
+STR_FULL	Full
+STR_INTRO	Intro
+STR_LAST	Last
+STR_NEW	New
+STR_NONE	None
+STR_OBJECT	Object
+STR_OPEN	Open
+STR_PAGE	Page
+STR_PERMISSIONS	Permissions
+STR_READ	Read
+STR_RUSLE2_ERROR	Rusle2 Error
+STR_SET	Set
+STR_SPECIAL	Special
+STR_UNTITLED	Untitled
+STR_TYPE	Type
+
+
+********************UNITS***********************	
+U_MG_P_HA	Mg/ha
+U_FOOT_RELATIVE	ft (pc only)
+U_DEGREE_C	deg C
+U_DEGREE_F	deg F
+U_DEGREE_K	deg K
+U_METER	m
+U_MM	mm
+U_CM	cm
+U_KM	km
+U_FOOT	ft
+U_YARD	yd
+U_MILE	mile
+U_INCH	in.
+U_MMDDYY	m/d/y
+U_MINUTES	mins
+U_HOURS	hr
+U_WEEKS	weeks
+U_MONTHS	months
+U_PERCENT	%
+U_YEARS	yr
+U_YEARS_CONVERTIBLE	yr
+U_KG	kg
+U_POUND	lb
+U_GRAM	g
+U_TON	t
+U_MEGAGRAM	Mg
+U_NONE	--
+U_POUND_P_AC	lb/ac
+U_POUND_P_FT2	lb/ft2
+U_KG_P_M2	kg/m2
+U_AU_DAY_P_HA	AU days/ha
+U_AU_DAY_P_AC	AU days/ac
+U_G_P_CM3	g/cm3
+U_KG_P_L	kg/L
+U_KG_P_M3	kg/m3
+U_LB_P_GAL	lb/gal
+U_LB_P_FT3	lb/ft3
+U_DAYS	days
+U_TON_P_AC	t/ac
+U_KG_P_HA	kg/ha
+U_METER_RELATIVE	m (pc only)
+U_YARD_RELATIVE	yd (pc only)
+U_CM_RELATIVE	cm (pc only)
+U_TON_FT_P_AC	t-ft/ac
+U_PERCENT_SLOPE	%
+U_PH_UNITS	pH
+U_DEGREES	deg
+U_SLOPE_HORIZ_P_VERT	xH:1V
+U_POUND_P_FT	lb/ft width
+U_KG_P_M	kg/m width
+U_MG_P_100M	Mg/100m width
+U_KG_P_M_P_PERCENT	kg/m width/%slope
+U_MG_P_100M_P_PERCENT	Mg/100m width/%slope
+U_POUND_P_FT_P_PERCENT	lb/ft width/%slope
+U_TON_P_100FT_P_PERCENT	t/100ft width/%slope
+U_KG_P_YR	kg/yr
+U_MG_P_YR	Mg/yr
+U_POUND_P_YR	lb/yr
+U_TON_P_YR	t/yr
+U_KG_P_DAY	kg/day
+U_POUND_P_DAY	lb/day
+U_G_P_KG	g/kg
+U_KG_P_MG	kg/Mg
+U_LB_P_TON	lb/t
+U_TON_P_100FT	t/100ft width
+U_TON_P_AC_YR	t/ac/yr
+U_TON_P_AC_DAY	t/ac/day
+U_LB_P_AC_YR	lb/ac/yr
+U_LB_P_AC_DAY	lb/ac/day
+U_KG_P_HA_DAY	kg/ha/day
+U_KG_P_M2_DAY	kg/m2/day
+U_LB_P_FT2_DAY	lb/ft2/day
+U_MG_P_HA_DAY	Mg/ha/day
+U_AUM_P_AC	AU/ac
+U_AC_P_AUM	ac/AU
+U_LB_P_FT_P_YR	lb/ft/yr
+U_LB_P_FT_P_SEC	lb/ft/sec
+U_LB_P_FT_P_DAY	lb/ft/day
+U_LB_P_FT_P_SEC	lb/ft/sec
+U_TON_FT_P_AC_YR	t/ac-yr/ft
+U_MG_M_P_HA_YR	Mg/ha-yr/m
+U_KG_P_M_P_YR	kg/m/yr
+U_KG_P_M_P_DAY	kg/m/day
+U_M3_P_M	m3/m
+U_FT3_P_FT	ft3/ft
+U_M3_P_HA	m3/ha
+U_FT3_P_AC	ft3/ac
+U_FT3_P_FT_P_YR	ft3/ft/yr
+U_FT3_P_FT_P_SEC	ft3/ft/sec
+U_FT3_P_AC_P_YR	ft3/ac/yr
+U_M3_P_M_P_YR	m3/m/yr
+U_M3_P_HA_P_YR	m3/ha/yr
+U_MM_P_YR	mm/yr
+U_IN_P_YR	in/yr
+U_MG_P_HA_YR	Mg/ha/yr
+U_JULIAN	day in yr
+U_MMDD	m/d
+U_DAYS_SINCE	day
+U_WEEKS_SINCE	weeks
+U_FRACTION	fraction
+U_HECTARE	ha
+U_ACRE	ac
+U_M2_P_G	m2/g
+U_FT2_P_OZ	ft2/oz
+U_METRIC_EROS_ANNUAL	SI
+U_ENGLISH_EROS_ANNUAL	US
+U_METRIC_EROD	SI
+U_ENGLISH_EROD	US
+U_METRIC_EROS_STORM	SI
+U_METRIC_EROS_PER_MM	SI eros. / mm ppt
+U_ENGLISH_EROS_STORM	US
+U_ENGLISH_EROS_PER_INCH	US eros. / in. ppt
+U_KG_P_HA_P_CM	kg/ha-cm
+U_LB_P_AC_P_IN	lb/ac-in
+U_LB_P_AC_P_FT	lb/ac-ft
+U_RILL_EROD	s/ft
+U_INTERRILL_EROD	kg-s/m4
+U_N_P_M2	N/m2
+U_IN_P_HR	in/h
+U_MM_P_HR	mm/h
+U_LB_P_FT2	lb/ft2
+U_PPM	ppm
+U_M_P_SEC	m/sec
+U_KM_P_HR	km/hr
+U_FT_P_SEC	ft/sec
+U_MILES_P_HR	mph
+U_MM_P_DAY	mm/day
+U_IN_P_DAY	in/day
+U_GRADE_SLOPE	rise/run
+U_DIESEL_GALLONS_P_ACRE	gal/ac
+U_DIESEL_LITERS_P_HECTARE	L/ha
+U_DIESEL_LITERS_P_KG_P_HA	L/kg/ha
+U_DIESEL_LITERS_P_MG_P_HA	L/Mg/ha
+U_DIESEL_GALLONS_P_LB_P_ACRE	gal/lb/ac
+U_DIESEL_GALLONS_P_TON_P_ACRE	gal/t/ac
+U_US_DOLLARS_P_GALLON	US$/gal.
+U_US_DOLLARS_P_LITER	US$/liter
+U_US_DOLLARS_P_ACRE	US$/ac
+U_US_DOLLARS_P_HECTARE	US$/ha
+U_BTU_P_GALLON	BTU/gal
+U_KILO_BTU_P_GALLON	kBTU/gal
+U_KILO_JOULE_P_GALLON	kJ/gal
+U_MEGA_JOULE_P_GALLON	MJ/gal
+U_KW_HR_P_GALLON	kw-hr/gal
+U_HP_HR_P_GALLON	hp-hr/gal
+U_KILO_JOULE_P_LITER	kJ/L
+U_MEGA_JOULE_P_LITER	MJ/L
+U_KW_HR_P_LITER	kw-hr/L
+U_BTU_P_ACRE	BTU/ac
+U_KILO_BTU_P_ACRE	kBTU/ac
+U_KILO_JOULE_P_ACRE	kJ/ac
+U_MEGA_JOULE_P_ACRE	MJ/ac
+U_KW_HR_P_ACRE	kw-hr/ac
+U_HP_HR_P_ACRE	hp-hr/ac
+U_KILO_JOULE_P_HA	kJ/ha
+U_MEGA_JOULE_P_HA	MJ/ha
+U_KW_HR_P_HA	kw-hr/ha
+U_NUM_P_M2	#/m2
+U_NUM_P_HECTARE	#/ha
+U_NUM_P_ACRE	#/ac
+U_NUM_P_FT2	#/ft2
+U_MEQ_P_100_G	meq/100g
+
+**************DIMENSIONS****************	
+D_SLOPE	slope
+D_TEMP	temperature
+D_LENGTH	length
+D_TIME	time
+D_MASS	mass
+D_NONE	none
+D_RELATIVE_AMOUNT	relative amount
+D_CONCENTRATION	concentration
+D_P_TIME	per time
+D_pH	pH
+D_DURATION	duration
+D_DURATION_YEARS	duration
+D_MASS_P_AREA	mass/area
+D_MASS_P_VOLUME	mass/volume
+D_MASS_P_TIME	mass/time
+D_MASS_RATIO	mass ratio
+D_MASS_DISTANCE_P_AREA	mass-distance/area
+D_NUM_P_AREA	#/area
+D_MASS_P_LENGTH	mass/length
+D_MASS_P_LENGTH_P_SLOPE	mass/length/%slope
+D_MASS_P_AREA_P_TIME	mass/area/time
+D_ANNUAL	time within a year
+D_SINCE	time since
+D_AREA	area
+D_SPEC_SURF_AREA spec. surf. area
+D_EROSIVITY_ANNUAL	annual erosivity
+D_ERODIBILITY	erodibility
+D_EROSIVITY_STORM	storm erosivity
+D_EROSIVITY_PER_PPT	erosivity per unit ppt
+D_MASS_P_AREA_P_DEPTH	mass/area/depth
+D_WEPP_RILL_EROD	rill erodibility
+D_WEPP_INTERRILL_EROD	interrill erodibility
+D_HYDR_CONDUCT	hydraulic conductivity
+D_SHEAR	shear
+D_PER_TIME	per time
+U_P_DAY	per day
+U_P_YEAR	per year
+D_SPEED	speed
+D_MASS_P_LENGTH_P_TIME	mass/length/time
+D_VOLUME_P_LENGTH	volume/length
+D_VOLUME_P_LENGTH_P_TIME	volume/length/time
+D_VOLUME_P_AREA_P_TIME	volume/area/time
+D_VOLUME_P_AREA	volume/area
+D_IRRIG_RATE	irrigation rate
+D_VOLUME_DIESEL_PER_AREA	volume diesel use per area
+D_COST_PER_VOLUME	cost per volume
+D_COST_PER_AREA	cost per area
+D_ENERGY_PER_VOLUME	energy per volume
+D_ENERGY_PER_AREA	energy per area
+D_MOLAR_CONC	molar concentration
+D_VOLUME_DIESEL_PER_MASS_PER_AREA	volume diesel use per mass per area
+
+
+*************  GUI_ACCESS  ******************
+* Steps:
+* 1) Add an identifier and display text here
+*    Name related items in the display text so that they sort contiguously.
+* 2) For menu items, add to the struct cmd_pairs[] in "mainfrm.cpp".
+*    (handy to copy resource id's from the rusle.rc file to reduce chance of mispelling)
+* 3) Add a paramater listing in the "GUI_ACCESS" section of CatalogSharedParams().
+* 4) usage example: App.pAccess->IsParamVisible("GUI_ADMIN_SHOW_LIST")
+
+GUI_ACCESS	Gui Access\nGui Access2\n*.gui
+INF_GUI_ACCESS_CHANGED	If you raised the gui access level of a menu item, then you may have to restart Rusle to see your changes.
+
+GUI_ADMIN_ACCESS_SAVE_TEXT	Admin, Save access as text file
+GUI_REDO	Command/Redo
+GUI_UNDO	Command/Undo
+GUI_LOAD_TEMPLATE	Template/Load
+GUI_EDIT_TEMPLATE	Template/Edit
+GUI_SAVE_TEMPLATE	Template/Save
+GUI_DB_COMPACT	Database/Compact
+GUI_DB_COMPARE	Database/Compare
+GUI_DB_CHECK	Database/Check
+GUI_DB_REARRANGE	Database/Rearrange
+GUI_DB_IMPORT_R1	Database/Import RUSLE1 data
+GUI_DB_IMPORT_R2	Database/Import update package
+GUI_DB_EXPORT_R2	Database/Export update package
+GUI_DB_IMPORT_FILE	Database/Import with templates, access
+GUI_DB_EXPORT_FILE	Database/Export with templates, access
+GUI_DB_REPAIR	Database/Repair
+GUI_DB_STARTUP	Database/Set startup database
+GUI_DB_IMPORT_NZ_RAIN	Import NZ rainfall data
+GUI_FILE_IMPORT	File/Import 
+GUI_FILE_EXPORT	File/Export 
+GUI_FILE_IMPORT_NRCS	  File/Import , NRCS management
+GUI_FILE_IMPORT_RUSLE2	  File/Import , RUSLE2 object
+GUI_FILE_IMPORT_NASIS_SOIL	  File/Import , NASIS Soil
+GUI_FILE_IMPORT_USDA_CLIMATE	  File/Import , USDA Climate
+GUI_FILE_EXPORT_FILESET	  File/Export , Fileset format
+GUI_FILE_EXPORT_NRCS	  File/Export , NRCS format
+GUI_FILE_EXPORT_RUSLE2	  File/Export , RUSLE2 format
+GUI_FILE_CLONE	File/Clone , Duplicate the current object
+GUI_FILE_APPLY_PARAM	File/Apply , Change parameter in multiple files
+GUI_MDB_ACCESS	Database/Allow mdb format
+GUI_OVERRIDE_BASE	Override Attrs: limit editing of overridden attr.
+GUI_TOOLS_DUMP_WEB	Help/Dump Web
+
+
+************************************************************************************
+**	Messages related to the engine, or shared by more than one model.
+**	Use with fns Message("KEY") or GetTitle("KEY").
+**	Keys start with a standard 3-letter prefix, then are followed by a standard
+**	  category name, then a description.
+**
+**	The 4 standard prefixes correspond to the icon type in a message box:
+**	ERR_		Error message box.
+**	QST_		Question message box.
+**	INF_		Info message box.
+**	WRN_		Warning message box.
+**
+**	STR_		Translatable string not directly in a message box.
+**
+**	Some critical messages are hard-coded into a table in Rusle2 to guarantee that
+**	  they are available at runtime. Search on ERR_FILE_MISSING to find the list.
+**
+************************************************************************************
+
+
+******** Messages: Access **************
+
+QST_ACCESS_CREATE_HASH	Access file '%s' does not have a valid authentication code.\nDo you want to stamp it as authentic?
+WRN_ACCESS_DB_READONLY	The current access level makes the current database readonly.\nTo be able to edit the database, change to a different access group.
+QST_ACCESS_DELETE	This will delete the access level '%s'.\nAre you sure you want to do this?
+WRN_ACCESS_INVALID_HASH	Access file '%s' does not have a valid authentication code.\nYou will not be able to use this access file.
+ERR_ACCESS_LOAD_FAILURE	Failed to load access file '%s'.
+WRN_ACCESS_LOAD_SUBSET	Access file '%s' has parameters / objects with higher access level than its parent access.\nThese access levels will be lowered to match the parent level.
+ERR_ACCESS_MISSING		You don't have an access file. Obtain one from your program supplier and place it in your 'Users' directory.
+WRN_ACCESS_NEWERVER	Your Users directory contains access files which were created by a newer version of Rusle2.\nYou may need to get new ones from the person you obtained them from.
+QST_ACCESS_OVERWRITE	An access level with that name exists.\nDo you want to overwrite it?
+QST_ACCESS_SAVE	Do you want to save the current access?
+ERR_ACCESS_SAVE_FAILURE	Failed to save access file '%s'.
+INF_ACCESS_TEXT_FILENAME	Check the local file: Session\\%s.txt  for a listing of this access list.
+INF_ACCESS_TEXT_FAILURE	Failed to save the access text file: '%s'.\nAn exception occurred while saving the file.
+STR_MUST_ENTER_ACCESS_NAME	Invalid Access String\nYou must enter an access name.
+
+MB_NO_ACCESS_THIS_OBJ	Permission to access "%s" has not been turned on.
+NO_VALID_OBJECTS	You don't have access to any model objects.  Raise the access level for some objects, or obtain a new access file and place it in your 'Users' directory.
+FULL_PARAM_ACCESS	Adding full parameter access to an obsolete access file.
+SAVE_ACCESS_FIRST	Would you like to save your changes to the current access settings first?
+
+ERR_ACCESS_NAME_INVALID	This is not a valid access name.\nAccess names must obey the following rules:\n\n- Be between 2 and 12 characters.\n- Only contain alphanumeric characters or underscores(_).\n- Not begin or end with an underscore.\n- Not contain consecutive underscores.
+
+MB_ACCESS_STR_TOO_SHORT	Need at least two characters; should uniquely identify to whom this is going
+MB_REMOVING_OLD_ACCESS_FILES	Removing obsolete access files.
+MB_CONFLICTING_ACCESS_FILES	You have already added access %s.  You are now trying to add it again from file "%s".  The program will use the first, and ignore the second.  You will need to correct this by removing the unwanted file, and by always creating new access files through the SaveAs and Export/Import processes.
+
+
+******** Messages: App/Frame ***********
+
+** Generic app messages
+QST_APP_INSTANCE	Rusle is already running. Do you want to run another copy?
+QST_APP_RECOVERY	Rusle2 didn't exit normally on the previous run. Would you like to send in a bug report?
+* In STR_APP_TITLE the $VERSION$ and $BUILDDATE$ strings are expanded before being shown.
+STR_APP_TITLE	RUSLE2 Version $VERSION$ ($BUILDDATE$)
+*ERR_APP_UNIMPLEMENTED	Not available yet.
+
+** Generic exception handling messages
+ERR_EXCEPTION_ONCMDMSG	An exception occurred in a Rusle2 command.\nYou may send in a bug report if you wish.\nCheck the checkbox to not show this message again.
+ERR_EXCEPTION_ONSYSCOMMAND	An exception occurred in a Rusle2 command.\nYou may send in a bug report if you wish.\nCheck the checkbox to not show this message again.
+ERR_EXCEPTION_ONWNDMSG	An exception occurred in a Rusle2 command.\nYou may send in a bug report if you wish.\nCheck the checkbox to not show this message again.
+ERR_EXCEPTION_APPRUN	An exception occurred in a Rusle2 command.\nYou may send in a bug report if you wish.\nThe application will shut down after the bug report dialog has been shown.
+
+** Generic frame window messages
+ERR_FRAME_CREATE_FAILURE	Failed to create the frame window.
+ERR_FRAME_LOAD_FAILURE	Failed to load the frame window.
+
+*MB_SHUTTING_DOWN	Shutting down RUSLE2. Email jlown@utk.edu, dyoder@utk.edu, or jplyon@utk.edu with this message text.
+CLOSE_OBJECTS_FIRST	Please close all objects first.
+MB_QUITTING_PREMATURELY	Quitting prematurely after failure to find child node in dropdown tree.
+
+
+********* Messages: Archives ***********
+
+QST_ARCHIVE_CREATE_CHANGEDB	Do you want to use a different database?
+ERR_ARCHIVE_FAILED_CREATE_DIR	Failed to create the directory needed for export files.
+ERR_ARCHIVE_DIFF_DUPLICATES	You are attempting to compare the same file/directory to itself.
+
+TITLE_SELECT_1ST_ARCHIVE	Select 1st XML archive
+TITLE_SELECT_2ND_ARCHIVE	Select 2nd XML archive
+
+
+
+********* Messages: Attrs **************
+
+WRN_ATTR_DIGITS_HIDDEN	You are entering more significant digits than are set to display.\nTo see the rest of your entry, increase the digits displayed.
+QST_ATTR_INTERNAL_CHANGING	You are about to change from using an internal object.\nYou will not be able to change back with your current access level.\nDo you still wish to make this change?
+*ERR_ATTR_INVALID_FN	Function was not in catalog listing.
+ERR_ATTR_INVALID_INDEX	Request for invalid index in parameter '%1' at index '%2'.
+ERR_ATTR_INVALID_NAME	Unable to create parameter '%s'.
+ERR_ATTR_INVALID_VALUE	%s: Invalid value.
+STR_ATTR_INVALID_RANGE	Must be between @min and @max.
+ERR_ATTR_NO_ROOT_DIM	No root dimension available in %s.
+ERR_ATTR_NOT_ROOT_DIM	Not a root dimension.
+QST_ATTR_RESET_OVERRIDES	This attr has other parameters that override this value.\nDo you want to reset the overrides to the new value?\n\n[Yes] will reset the overrides.\n[No] will leave the overrides.\n[Cancel] will cancel out of this change.
+ERR_TOO_MANY_ATTR	There are too many conformant attrs to display in the 'Add attr' submenu!
+
+MB_PARENT_NOT_CREATED	Parent attribute has not been created yet
+MB_OVERRIDE_DEPENDENT	You are overriding an equation that sets this attribute.  Is that what you want to do?
+MB_TERM_NOT_EXIST	An attribute equation used an index that was too large for the array of terms.
+MB_CANT_CREATE_IN	Can't create %s in object %s.
+
+
+******** Messages: Buttons *************
+
+MODAL_BUTTON_APPLY	Apply
+MODAL_BUTTON_CLOSE	Apply/Close
+MODAL_BUTTON_CANCEL	Cancel
+BUTTON_CTRL_TEXT	open
+BUTTON_SAVE	Save
+BUTTON_OK	OK
+
+
+******** Messages: Catalog *************
+
+ERR_CATALOG_INVALID_DIM	Illegal dimension in CListing.
+ERR_CATALOG_LOAD_FAILURE	Failed to load catalog file: '%s'\nCause: %s
+*ERR_CATALOG_UNLISTED_FN	No catalog listing.
+
+MB_LISTING_SHOULD_EXIST	The catalog is missing an entry for type='%s' name='%s'.
+
+
+********* Messages: Database ***********
+
+ERR_DB_CANT_OPEN	Failed to open the Rusle2 database.\nYou must open a database using command {Database | Open alternate...} before you can run Rusle2 simulations.
+ERR_DB_NONE_OPEN	You need an open database to use this command.\nUse menu item {Database | Open alternate...} to open a database first.
+ERR_DB_CANT_SAVE	Unable to open or create file '%s' in current database.
+WRN_DB_CLOSE_ALL	Please close all objects before checking the database.
+QST_DB_OVERWRITE	A database with that name already exists.\nDo you want to overwrite it?
+WRN_DB_READONLY	This database is readonly. You will not be able to make changes.\nThe database is either a readonly file or is locked.\nTo alter files, export/import to another database, or unlock it.
+WRN_DB_RENAME	Your existing database is being replaced by an updated databse.\nThe previous database is being moved to the Rusle2\Imports directory as '%s'.\nYou can use the menu item Database -> Import to import files into the new database.
+STR_CONVERT_DATABASE_TO	Convert database to
+STR_DB_OPEN_ALTERNATE	Database to open
+WRN_CONVERT_MDB	You have selected an obsolete format (MDB) database.\nRusle2 must convert this database to the new (GDB) format before loading.
+QST_GDB_FOUND	There is already a GDB file with the same name as the MDB database you selected.\nWould you like to use it instead?
+
+ERR_DB_OBJ_NOT_FOUND	The file below was not found.  Please select a replacement.  If you choose not to, the default will be used instead.\n\n   %s
+QST_DB_STARTUP_MISSING	The startup database '%s' was not found.\nRusle2 will open the default '%s' instead.\n\nDo you want to use this as the startup database from now on?
+
+********* Messages: DataDLL ************
+*** These belong in a separate file ****
+****************************************
+
+WRN_DATADLL_IMPORT_READONLY_FILES	Warning: You are importing files which you will not be able to edit after importing.\nTo be able to edit these files, either import them through a subfolder you are able to edit in using the 'Import to new folder' control below, or copy the files after importing.\n\n[OK]	Continue import\n[Cancel]	Cancel import
+
+
+********* Messages: Dates **************
+
+STR_DATE_DAYS_RANGE	Day must be between 1 and 31.
+STR_DATE_MONTH_RANGE	Month must be between 1 and 12.
+ERR_DATE_INVALID	Bad date #%s in %s.\n\nSince the program cannot continue without this being fixed, it is turning off the Autocalc feature.  Please turn this back on when you are done editing the values.
+ERR_DATE_REQUIRED_FORMAT_MMDD	Date must have format: mm/dd
+ERR_DATE_REQUIRED_FORMAT_MMDDYY	Date must have format: mm/dd/yy
+ERR_DATE_UNKNOWN_FORMAT	Unrecognized date format:\nDate = %s\nUnit = %s
+
+*MB_INVALID_MONTH	Invalid month
+*MB_INVALID_DAY	Invalid day
+*MB_TOO_MANY_DAYS	Too many days for this month
+*MB_FEBRUARY_LIMIT	February has only 28 days
+*MB_INVALID_YEAR	Invalid year
+MB_YEAR_MUST_BE_NONNEG	Year must be non-negative.
+
+
+******* Messages: Dialogs (misc) *******
+
+ERR_SELECT_STARTUP_OBJ	You need to select a startup object
+STR_LABEL_CHOOSE_DEFAULT	Click on a default to edit it
+STR_LABEL_SELECT_DEFAULT	Select default: %s
+STR_LABEL_DIALOG_RENAME	Enter a name:
+STR_LABEL_DIALOG_SAVE_REPLACE	You are saving a file under a new name.  If this file is used within another (for example, a vegetation referred to within a management), you must tell the program what to do with the reference to the old file.\n\n[Yes] will replace references to the old file with references to the new one.\n[No] will leave the references to the old file in place.
+STR_YOU_MUST_SELECT_A_GROUP	You must select a group.
+STR_YOU_MUST_SELECT_A_FOLDER	You must select a folder.
+
+STR_TITLE_TEMPLATE_LOAD	Load user template
+STR_TITLE_TEMPLATE_COMPARE	Select 2nd database
+STR_TITLE_TEMPLATE_SAVE_AS	Save current user template as...
+STR_TITLE_DIALOG_RENAME	Enter name
+STR_TITLE_DIALOG_SAVE_REPLACE	Replace filename references
+STR_TITLE_IMPORT_PACKAGE	Select import package
+STR_TITLE_IMPORT_DATABASE	Select import database
+
+STR_DATABASE_FILES	RUSLE2 Database Files
+
+*QST_DIALOG_NEW_GRID	Do you want a vertical grid (the default)?\n[Yes]\tUse a vertical grid\n[No]\tUse a horizontal grid
+
+
+********** DialogEnterName() ***********
+
+STR_RENAME_CLONED_FILE_PROMPT	New filename:
+STR_RENAME_CLONED_FILE_TITLE	Rename cloned file
+
+STR_RENAME_TEMP_MAN_PROMPT	Temporary management file name:
+STR_RENAME_TEMP_MAN_TITLE	Name the temporary management file
+
+STR_ACCESS_SAVE_AS_PROMPT	Enter a 2-12 character name identifying the intended user of this access level. This will be appended to the current access name to create a new name.
+STR_ACCESS_SAVE_AS_TITLE	Saving new access level
+
+*MB_NEED_A_NAME	Need a name
+
+
+********* Messages: DLLs ***************
+
+ERR_HTMLHELP_MISSING	HTML Help has not been installed.\nYou must install HTML Help before you can view Rusle2's documentation.
+*ERR_WEPP_COULDNT_LOAD	Couldn't load the Wepp DLL.
+
+
+********* Messages: Email **************
+
+INF_EMAIL_APP_FOUND	Email app found.
+ERR_EMAIL_APP_NOT_FOUND	Email app not found.
+ERR_EMAIL_MAPI_MISSING	MAPI Mail functionality hasn't been installed or registered on this system. This command won't function until that is done.
+ERR_EMAIL_EXCEPTION	An exception occurred while building or sending the email.\nThe bug report has been saved as a zip file in directory "...\Rusle2\Session\".\nYou will have to email this file yourself if you want to report this bug.
+ERR_EMAIL_SUBJ_MISSING	You need to enter a subject.
+ERR_EMAIL_USER_MISSING	Please enter your last name or a user name to allow us to more easily track your bug report.
+ERR_EMAIL_MAPI_FAIL_SAVE_FILE	The automatic Mail transmission failed. Would you like to keep this file?\n%s  \n\n(Click YES to keep, NO to discard.)
+
+
+******** Messages: Engine **************
+
+ERR_ENGINE_EXCEPTION	An exception occurred while calling calc fn %s.\nRusle2 will abort the calculation and close all open files.\nA report of the calculation stack has been output to file %s.
+ERR_ENGINE_SHUFFLE	An exception occurred during a calculation.\nRusle2 will abort the calculation and close all open files.\nDebugging information has been output to the 'Rusle2\Session' subdirectory.
+ERR_ENGINE_WEDGED	Cannot complete the calculations.  Correct the error described earlier, or contact support staff with a complete description of the problem
+STR_ENGINE_CALCULATING	Calculating
+STR_ENGINE_FINISHED	Finished calculating
+STR_ENGINE_AUTOCALC_OFF	!!Auto update turned OFF!!
+
+
+******* Messages: Files/Dirs ***********
+
+** These messages are for external Win32 files. **
+ERR_FILE_ACCESS_DENIED	The file could not be accessed.
+ERR_FILE_BAD_PATH	All or part of the path is invalid.
+ERR_FILE_BAD_SEEK	There was an error trying to set the file pointer.
+ERR_FILE_BAD_TABLE	Bad table name '%s' in filename '%s'.
+ERR_FILE_CREATE	Failed to open or create file '%s'.",
+ERR_FILE_DIR_FULL	There are no more directory entries.
+ERR_FILE_DIR_MISSING	Failed to find directory '%s'.
+ERR_FILE_DISK_FULL	The disk is full.
+ERR_FILE_END_OF_FILE	The end of file was reached.
+ERR_FILE_HARD_IO	There was a hardware error.
+ERR_FILE_INVALID_FILE	There was an attempt to use an invalid file handle.
+ERR_FILE_IO_ERROR_READ	An unexpected error occurred while reading '%s'.
+ERR_FILE_IO_ERROR_WRITE	An unexpected error occurred while writing '%s'.
+ERR_FILE_LOCK_VIOLATION	There was an attempt to lock a region that was already locked.
+ERR_FILE_MISSING	File '%s' is missing. This may indicate a corrupted installation.\nReinstall if necessary.
+ERR_FILE_NOT_FOUND	The file could not be located.
+ERR_FILE_REMOVE_CUR_DIR	The current working directory cannot be removed.
+ERR_FILE_SHARING_VIOLATION	SHARE.EXE was not loaded, or a shared region was locked.
+ERR_FILE_TOO_MANY_OPEN_FILES	The permitted number of open files was exceeded.
+ERR_FILE_UNSPECIFIED_ERROR	An unspecified file error occurred.
+STR_FAILED_TO_OPEN_FILE	Failed to open file
+
+** These messages are for 'files' stored in the database. **
+ERR_FILE_ACCESS_NOSAVE	Cannot save object '%s'\nThis object type is readonly.\nYour current access group doesn't allow you to save files of this type.
+WRN_FILE_ALREADY_OPEN	You already have an open, modified copy of '%s'. You must save it first or else it will be overwritten.
+ERR_FILE_CORRUPTED	An error occurred while loading file: '%s'.\nThe file appears to be corrupted.\nThe default file of this type will be loaded instead.
+ERR_FILE_COULDNT_OPEN	Couldn't open file for error log!
+ERR_FILE_DEFAULT	An error occurred while loading the default file: '%s'.\nA hard-coded default file of this type will be loaded instead.
+ERR_FILE_EMPTY	An error occurred while loading file: '%s'.\nThe file contains no data.\nThe default file of this type will be loaded instead.
+ERR_FILE_GROUP_NOSAVE	Cannot save object '%s'\nThis object is readonly.\nYour access group doesn't allow you to save this object, although you may be able to save it to a different location.
+ERR_FILE_NOSAVE_OBJ	Unsaveable object.\nObject type '%s' (%s) cannot ever be saved.
+WRN_FILE_RECLONING	File '%s' not found. Recloning from the original file.
+QST_FILE_REPLACEBAD	Do you want to replace all other instances of the missing file\n"%s"\nwith\n"%s"?\nThis will only modify currently open files.
+WRN_FILE_SAVE_TEMP	WARNING:  You are currently saving:\n\n ==>  %s  <==\n\n which contains the temporary file\n\n==>  %s  <==\n\nIf you proceed without saving the temporary file as a permanent one, the program will replace the temporary file with a default.\n\nDo you wish to save the temporary file?
+ERR_FILE_TAG_MISSING	Loading error: tag '%s' is missing from the file.
+ERR_FILE_TAG_OUTOFORDER	Loading error: tags '%s' and '%s' are out-of-order in the file.
+ERR_FILE_TAG_UNEXPECTED	Error: Found tag '%s' during file loading when expected tag '<Obj>'.
+QST_FILE_SAVE_SUBOBJ	You are saving a (%1) subobject contained inside a (%2) object.\nDo you wish to save the contained (%1) subobject?\n\n[Yes] will save the (%1) subobject\n[No] will save the (%2) object\n[Cancel] will abort the save.
+ERR_FILE_WRONG_TABLE	Error: Wrong database table. You are attempting to saving file '%1' into table '%2'.
+
+ERR_DLL_NOT_FOUND	The library %s could not be located.
+ERR_LOG_FILE_ERROR	Rusle2 log file error
+
+MB_FILE_CANT_BE_REMOVED	File %s cannot be removed.
+MB_FILE_IN_USE	File '%s' is in use. It will be opened read-only.
+*DELETE_RENAME_FILE	Deleting/renaming this object will disable any objects that depend on it!  Are you sure you want to continue?
+MB_COULDNT_FIND	Couldn't find '%s'. Opening default instead.
+*MB_WILL_CREATE_DEFAULT	Unable to find file.  The program will attempt to create a default file and will store it under the requested name.
+
+
+******** Messages: Functions ***********
+
+ERR_FN_DESTROYING_FN_STILL_IN_USE	Destroying function that is still in use!
+ERR_FN_NOT_FOUND	Couldn't find function %s.
+
+MB_CANT_EXAMINE_FNS	Can't examine functions.
+
+
+********* Messages: Import/Export ******
+
+ERR_EXPORT_FILENAME_INVALID	The export filename is invalid.\nThe name cannot:\n- be empty\n- have trailing blanks\n- contain characters \ | / : < > * " ?\n
+ERR_EXPORT_ONLY_MANAGEMENTS	Can only export managements.
+WRN_EXPORT_SELECT_ACCESS	Please select an access level.
+WRN_EXPORT_SELECT_SOMETHING	Please select something to export.
+WRN_EXPORT_SELECT_TEMPLATE	Please select one or more templates.
+
+ERR_IMPORT_CIYCODE_NOT_FOUND	Looked for but could not find citycode %s in %s so will use default city.
+INF_IMPORT_FINISHED	Finished importing files.
+INF_R1_IMPORT_FINISHED	Finished importing RUSLE1 files.
+QST_IMPORT_SELECT_CITYLIST	Can you select the RUSLE1 Citylist file containing the citycodes used in these .rus files?
+ERR_IMPORT_BAD_EXTENSION	You must select a database file with the correct extension.
+WRN_IMPORT_MISSING_EFFECT	Import: can't find effect type %s in file %s. Setting effect to NO_EFFECT. Please check file after import.
+WRN_IMPORT_SELECT_ACCESS	Please select one or more access level.
+WRN_IMPORT_SELECT_DATABASE	Please select a database.
+WRN_IMPORT_SELECT_TEMPLATE	Please select one or more templates.
+WRN_IMPORT_SELECT_TYPE	Please select something to import.
+INF_NZ_RAIN_IMPORT_FINISHED	NZ rain data import finished
+
+STR_TITLE_IMPORT_CITYLIST	Select single RUSLE1 Citylist file containing the citycodes
+STR_TITLE_IMPORT_EI	Select single RUSLE1 EI distribution file to import
+STR_TITLE_IMPORT_NZ_RAIN	Select NZ rain data file to import
+
+MB_CHOSE_NOT_TO_SELECT	Chose not to select Citylist file, so will use default city.
+MB_EXPORT_IS_FINISHED	The export is finished.
+MB_PACKAGE_EXPORT_IS_FINISHED	Rusle2 package export finished.
+MB_IMPORT_FINISHED	The import is finished.
+MB_PACKAGE_IMPORT_FINISHED	Rusle2 package import finished.
+MB_NEED_CITYLIST	Need Citylist file to continue.
+MB_NEED_R1_CITYLIST	Do you need to import a RUSLE1 citylist file?
+MB_NEED_R1_EI	Do you need to import a RUSLE1 EI distribution file?
+MB_NEED_R1_OP	Do you need to import a RUSLE1 operation file?
+MB_NEED_R1_RUS	Do you need to import one or more RUSLE1 .rus files?
+MB_NEED_R1_VEG	Do you need to import a RUSLE1 vegetation file?
+MB_PROBLEMS_READING	Problems reading %s.\n\n%s\n\nCheck after import.
+MB_PROBLEM_IMPORTING	Problem with importing %s.
+ERR_ZIP_IMPORT	Error unzipping import package
+
+INF_NZ_RAIN_IMPORT_ERROR1	Problem in NZ data file record %s %s
+
+
+***** Messages: Import/Export CFF ******
+
+STR_TITLE_EXPORT_MAN_CFF	Save management to NRCS format...
+STR_TITLE_EXPORT_XML_NEW	Save open object data as XML...
+STR_TITLE_EXPORT_XML_OLD	Save original object data as XML...
+STR_TITLE_IMPORT_MAN_CFF	Open management from NRCS format...
+STR_TITLE_IMPORT_XML_TYPE	Enter object type
+STR_TITLE_IMPORT_XML_NEW	Open an object from XML data...
+ERR_IMPORT_XML_FILE_EMPTY	This file is empty and will not be imported:\n'%s'
+ERR_IMPORT_XML_FILE_FAILED	Failed to open file for import:\n'%s'
+ERR_IMPORT_XML_OBJ_UNKNOWN	Unrecognized RUSLE2 object type.\nThe name must be the correct case, and must be a valid object type that you have access to edit.
+STR_IMPORT_XML_OBJ_PROMPT	The XML file doesn't contain an object type.\nEnter the object type of the file.\n(e.g. CLIMATE, MANAGEMENT, PROFILE, SOIL,...)
+STR_SAVE_THE_SLOPE_FILE	Save the slope file?
+STR_DO_YOU_WANT_TO_USE_CITYLIST_FILE	Do you want to use Citylist file, %s ,to get citycode information?
+
+
+******** Messages: MFC Framework *********
+
+AFX_IDS_IDLEMESSAGE	For Help, press F1
+
+
+******** Messages: Parameters/Preferences *********
+
+ERR_PARAM_OPEN_FAILURE	couldn't open file to hold param pref listing
+INF_PARAM_WRITE_VISUALS	%s visuals are shown and will be written to the file param_prefs.txt .
+INF_PARAM_WHICH_VISUALS	List the missing params. from just the general and current folders? (NO lists all missing parameters throughout the view)
+WRN_PARAM_MISSING_HELP	%s parameters are missing help and will be written to the file missing_params.txt .
+
+******** Messages: Permissions *********
+
+ERR_PERM_OPEN_FAILURE	Failed to open the permissions file.\nThis file is required to run Rusle2. Contact your administrator or reinstall Rusle2.
+ERR_PERM_LOAD_FAILURE	Failed to load the permissions file.\nThis file is required to run Rusle2. Contact your administrator or reinstall Rusle2.
+ERR_PERM_SAVE_FAILURE	Failed to save the permissions file.\nThis file is required to run Rusle2. Contact your administrator or reinstall Rusle2.
+ERR_PERM_ACCESS_REQIRED	You cannot edit this permission because cannot alter its access group '%s'.\nYou can only edit an access group that you could have generated.
+ERR_PERM_PERMS_REQIRED	You cannot edit this permission because you have no permissions on this group at this level.
+INF_PERM_NOT_IMPLEMENTED	Permissions features are not implemented in this version of Rusle2.
+ERR_PERM_TEXT_LOAD		Failed to load permissions from text file.
+ERR_PERM_LOAD_COLUMNS	Permissions: Failed to read line %s from text file '%s'.\nInvalid number of columns.
+ERR_PERM_LOAD_ACCESS	Permissions: Failed to read line %s from text file '%s'.\nInvalid access name.
+ERR_PERM_LOAD_PERMS	Permissions: Failed to read line %s from text file '%s'.\nInvalid permission characters.
+QST_PERMS_CREATE_HASH	Permissions file '%s' does not have a valid authentication code.\nDo you want to stamp it as authentic?
+QST_PERM_SAVE_DEFAULT	Do you want to overwrite the permissions file with default values?
+STR_NEW_GROUP_PERMISSIONS	New Group Permissions
+STR_SAVE_PERMISSIONS_AS_TEXT_FILE	Save Permissions as Text File
+WRN_PERMS_INVALID_HASH	Permissions file '%s' does not have a valid authentication code.\nYou will not be able to use this permissions file.
+WRN_PERMS_INHERITED_PERM	You cannot remove this permission. It is inherited from a higher-level directory. You may remove it in that directory, or override it in this directory.
+WRN_PERMS_ALL_GROUPS_ASSIGNED	All access groups already have permissions assigned.\nYou may edit an existing group, or add a new access group.
+WRN_PERMS_NO_GROUPS_EDITABLE	There are no access groups which you have access to edit.\nYou need to create a new access group first.
+
+
+********* Messages: Printing ***********
+
+STR_TITLE_PRINT_TEMPLATE_OPEN	Open Report Template
+ERR_PRINT_ATTR_WRONG_OBJ	The printing template is asking for parameter '%s', which is not available in object type '%s'.\nThis printing template appears to be for a different type of object (e.g., a profile instead of a management) than your current active object.\nPlease correct the template or select a different one.
+ERR_PRINT_ATTR_CANT_CREATE	The printing template is asking for parameter '%s', which cannot be created for an unknown reason.\nPlease correct the template or select another.
+ERR_PRINT_ATTR_UNLISTED	The printing template is asking for parameter '%s', which is unrecognized.\nThis may be an obsolete parameter or a typo in the template.\nPlease correct the template or select another.
+QST_PRINT_EXT_CHANGED	You have selected a print template with extension '.%s'.\nRusle2 usually expects an extension '.%s' for this file type.\nDo you want to use this file as a print template anyway?
+WRN_PRINT_MODAL_OBJ	You are trying to print a modal view of type '%s'.\nRusle2 only allows printing objects which can be saved as files.\nTry closing the modal view and printing from its parent.
+ERR_PRINT_MSWORD_NOT_FOUND	Printing:\nFailed to create an automation connection to Microsoft Word.\nCause: %s\nMicrosoft Word (97,2000, 2002) must be installed on this system to create reports from Word document templates.
+ERR_PRINT_MSWORD_NO_AUTO_RELEASE	Printing:\nMicrosoft Word autorelease is not set.
+ERR_PRINT_DIMENSIONED_SUB_OBJ	The current code does not allow a print template to ask for a subobject with size > 1.  This was the case for the parameter %s in this print template.  Contact the program developers for more information
+QST_PRINT_NO_DOT	There are no report templates for object type '%s'.\nDo you want to search for one?
+WRN_PRINT_NONFILE_OBJ	You are trying to print a view of type '%s'.\nRusle2 only allows printing objects which can be saved as files.\nTry printing from its parent '%s' view instead.
+WRN_PRINT_OLD_EXT	(Note: this warning is only shown for high-access users)\n\nThe 'Printing' directory contains templates that end with extension '.dot'.\nAll templates should be renamed to have form '.???.dot',\n  where ??? = cli, cst, dds, eid, hes, hfp, hyd, man, ope, pln, pro, rsd, sbs, soi, stc, veg, wrk, ...\nThese extensions can be found by opening a report template and checking the exension in the file open dialog.\nThese report templates should be renamed before giving them to lower-access users.
+ERR_PRINT_WRONG_OBJECT	The object you are attempting to print: %s \ndoes not match the object type of this template: %s \nDo you wish to continue?
+ERR_PRINT_CANT_CREATE_IN_FATAL	The printing template is asking for %s, which is not available in %s.  The printing template may be for a different kind of object, or it may need to request a different parameter.  The program cannot continue with this printing operation until this error is corrected
+WRN_PRINT_TEMPLATE_UNCHECKED	(Note: this warning is only shown for high-access users)\n\nThis print template doesn't contain a check on the object type as its first entry.\nThe string "<ObjName>:TemplateObjectType" should occur in the document before any other patterns.\nHere <ObjName> is an object name like PLAN or PROFILE.\nIf this string doesn't occur in the document, this can be very confusing to the end user.\nThis pattern will be stripped from the final print report.
+QST_PRINT_WRONG_DOT	The report template file '%s' doesn't apppear tohave the corret format.\nDo you want to use it anyway?
+
+STR_REPORT_OPEN_FILESET	Select report to open
+ERR_REPORT_FAILED_TO_OPEN_FILESET	Failed to open a fileset in this report.
+
+********* Messages: Registry ***********
+
+MB_FAILED_TO_CLOSE_KEY	Failed to close key.
+MB_FAILED_TO_CREATE_KEY	Failed to create registry key '%s'.
+MB_FAILED_TO_OPEN_KEY	Failed to open registry key '%s'.
+
+
+********* Messages: Slope graphic ******
+
+INF_GRAPHIC_CLICK_MAN	Please click on the management layer.
+INF_GRAPHIC_CLEAR_FILTER	Now we'll set the filter strip management to bare.
+WRN_GRAPHIC_CANT_REMOVE_FIRST	Can't remove the first row
+
+
+********* Messages: Status bar *********
+
+MS_CALC_LOADING_DATABASE	Loading database ...
+
+** Text that goes into the tooltips of the status bar
+** WARNING: the text of the following messages is close to a windows limit on length.
+** If their text is too long, garbage characters will appear in the tooltips.
+ID_PANE_ACCESS:*TIP	(Right click) Select Access.... (Left click) Edit Access
+ID_PANE_TEMPLATE:*TIP	(Right click) Template menu... (Left click) Edit Template
+ID_PANE_DATABASE:*TIP	(Right click) Database menu... (Left click) Change Database
+
+
+********* Messages: Tables *************
+
+WRN_CELL_READONLY	This is a read-only cell. You can't change its contents.
+
+ERR_TABLE_CANT_DELETE_ALL	You may not delete all the rows.
+ERR_TABLE_CREATE_FAILURE	Couldn't create new table.
+WRN_TABLE_RESIZING_UNIMPLEMENTED	Resizing not yet supported in expanded tables.
+
+MB_YOU_MUST_FIRST	You must first select a cell in a parameter.
+MB_CAN_ONLY_CREATE	You can only create a table from a parameter which is in a grid and is not a dimension.
+MB_CANT_DELETE_ONLY_ELEMENT	Can't delete the only element.
+*MB_ROW_COL	Row: %s, Col: %s.
+*MB_THIS_PARAM_IS_ALREADY	This parameter is already in a table.
+
+
+********* Messages: Tabs/folders *******
+
+ERR_TAB_CANT_DELETE_ONLY	You can't delete the only tab.
+QST_TAB_DELETE_CONTENTS	This will delete the entire contents of this tab.\n\n==> %s <==\n\n Are you sure you want to do this?
+ERR_TAB_INSERT_FAILED	CTabCtrl::InsertItem failed!
+
+********* Messages: Templates **********
+
+ERR_TEMPLATE_EXCEPTION	Loading template '%s' failed due to an unhandled exception.
+***ERR_TEMPLATE_INVALID_TABLEPREF	Invalid table pref record for table %s in folder %s.
+ERR_TEMPLATE_INVALID_TABLEPREF	Not able to show all of the original tables\nSome parameters may no longer be part of the code.
+ERR_TEMPLATE_OBSOLETE	The selected template is obsolete and should be deleted.
+ERR_TEMPLATE_SAVE	Saving template '%s' failed due to unhandled excpetion.
+QST_TEMPLATE_SAVE		Do you want to save the current template?
+STR_TEMPLATE_EDITOR	Edit template: '%s'
+WRN_TEMPLATE_INVALID_TAB_ORDER	Table index out of range in GetTabOrder().
+WRN_TEMPLATE_MAXIMIZED	Please restore (un-maximize) the window before rearranging.
+
+MB_TEMPLATE	template
+MB_MOVE_ADJACENT_VISUAL	Please move the adjacent visual first.
+*MB_NO_ROOM	No room.
+MB_BAD_XML_IN_TABLE	Bad XML tag in template's table description.
+
+
+******* Messages: Titles/Strings *******
+
+ERR_TITLE_NOT_FOUND	Can't find a display string to match the ID: %s
+QST_TITLE_RENAME	This title may also be used by other templates or objects. Do you still want to change it?
+QST_TITLE_USE_EXISTING	%s was found with the same ID.  Do you want to use that existing title instead?
+WRN_FOLDER_TITLE_IN_USE	'%s'\nThis folder title is already in use in this view.
+WRN_FOLDER_NAME_IN_USE	'%s'\nThis folder name is already in use in this view.
+
+DO_NOT_EDIT	*****************************************************************\n** Translation string (title) map for Rusle2 (www.rusle2.org). **\n** This file is part of the Rusle2 distribution.               **\n** See "Rusle2 Translation Titles.rtf" for more information.   **\n*****************************************************************\n
+MB_COULDNT_OPEN_USERTXT	Sorry! \nChanges you made to folder names will not be saved. \nPlease change the file properties of the file "titles_user.txt" to write-enabled, and re-run Rusle2.
+STR_GROUP	Group
+STR_TYPE	Type
+STR_PERMISSIONS	Permissions
+
+
+********* Messages: Visuals ************
+
+**** Special strings shown in visuals that display text.
+**** CUSTOM  means the value has been changed by the user, but is distinct from NONE.
+**** DEFAULT specifies loading the default of that type.
+**** INTERNAL means a ptr attr gets its object from an internal subobject instead.
+**** MIXED is for remote attrs which have more than one value for that index.
+**** MODEL   specifies loading the hard-coded model object of that type.
+**** NONE  is for some attrs which allow an "empty" selection.
+**** NULL  is for some attrs which allow an "unset" value.
+
+#ENTRY_CUSTOM	(custom)
+#ENTRY_DEFAULT	(default)
+#ENTRY_INTERNAL	(internal)
+#ENTRY_MIXED	-- mixed --
+#ENTRY_MODEL	(model)
+#ENTRY_NONE	(none)
+#ENTRY_NULL	(null)
+
+** Internal objects usually have the pointer parameter name prefixed when translated.
+** This default translation handles the case that no parameter-specific translation exists.
+INTERNAL	(internal)
+
+********* Messages: Windows ************
+
+ERR_WIN_SYSTEM_ERROR	System Error:\n%s
+
+MB_FAILED_TO_CREATE_IMAGELIST	Failed to create imagelist.
+
+
+******** Messages: XML Files ***********
+
+ERR_XML_LOAD_FAILURE	Errors occurred while loading XML file '%s'.\nCause: %s.\n\nEither this file isn't a valid XML file or it is missing end tags.\nRusle2 will use the loaded file, but you should examine it to see if the errors are important.
+
+
+************ Unclassified **************
+
+STR_NO_STORED_UNITS	No stored units for data in param '%s'.\nCan't convert stored value(s) without units to system units.
+STR_MISSING_PARAMETERS	This management is missing some parameters needed for export.
+STR_OVERWRITE_FILE	Overwrite the existing file?
+STR_SELECT_MULTIPLE_FILES	Select multiple files to apply value to
+**
+STR_MAN_NUM	Man #
+STR_SELECT_DATABASE	Select database
+STR_EDIT_TEMPLATE	Edit template
+STR_IMPORT_CITYLIST	Select single RUSLE1 Citylist file to import
+STR_IMPORT_OPLIST	Select single RUSLE1 Operation (Oplist) file to import
+STR_IMPORT_CROPLIST	Select single RUSLE1 Vegetation (Croplist) file to import
+STR_IMPORT_CLIMATE	Select a USDA Climate text file to import
+STR_IMPORT_RUS	Select all RUSLE1 .rus files to import
+**
+STR_CHANGE_UNITS_TO	Change units to %s
+STR_USER_DEFAULT	User &default: '%s'
+**
+MB_BAD_STRING_TOKEN	Bad string token in ExtractNextToken().
+MB_CAN_BE_NO_LESS_THAN	%s can be no less than %s.
+MB_CAN_BE_NO_MORE_THAN	%s can be no more than %s.
+MB_CANT_FIND_END_TAG	Can't find the end tag in XML stream.
+**
+MB_FAILED_TO_FIND	Failed to find matching name for %s.
+MB_FAILED_TO_SAVE_ARCHIVE	Failed to save archive.
+MB_FAILED_TO_OPEN_FILE	Failed to open file.
+MB_INVALID_CELL_VALUE	Invalid cell value!
+MB_INVALID_FORMAT_INT	The string '%s' isn't a valid integer value.
+MB_MAY_NOT_DELETE_ALL	You may not delete all the rows.
+MB_MODAL_VIEW_ALREADY	A modal view is already open. Please close it before opening this one.
+MB_MODAL_VIEW_ALREADY_TITLE	!!!YOU MUST CANCEL OR CLOSE THIS MODAL WINDOW BEFORE MOVING TO ANOTHER WINDOW!!!
+MB_MODAL_VIEW_ALREADY_INFORM	Please close the window titled: \n%s\nbefore opening another.
+MB_NO_UNITS_SUPPLIED	No units were supplied for %s.  Values will not be loaded.
+MB_NOT_VALID_TAG	Not a valid tag.
+MB_ONLY_20_UNITS	Only 20 units can be displayed.
+MB_REMOTE_TERM	Remote term -- go to its view.
+MB_SAVE_DLG_YN	Do you want to save the %s:\n'%s' ?
+MB_SAVE_DLG_YNC	Do you want to save changes to \n\n%s: '%s' ?\n\n  -- Yes -- save changes (lose previous information)\n  -- No -- leave the original intact without saving any changes\n  -- Cancel -- stop closing and show its view
+MB_SAVE_DLG_KILL_TEMP_YNC	Do you want to save the temporary file \n\n%s: '%s' ?\n\n  -- Yes -- save changes to a new permanent file\n  -- No -- destroy the temporary file without saving changes\n  -- Cancel -- stop closing and show its view
+MB_SAVE_DLG_CLOSE_TEMP_YNC	You are closing the temporary file \n\n%s: '%s' ?\n\n  and have several options:\n\n-- Yes -- save changes to a new permanent file that you will name\n-- No -- close its view but keep the temporary file in memory.  You will be asked again if you want to save it when you close RUSLE2\n-- Cancel -- stop closing and show its view
+MB_SAVE_DLG_TEMP_OVERWRITE_YN	Do you want to overwrite the temporary file \n\n%s: '%s' ?\n\n  -- Yes -- overwrite\n  -- No -- create a new temporary file
+MB_THIS_OP_ONLY	This operation only applies to single-cell grids.
+MB_THIS_WILL_DELETE	This will delete %s.  If other objects use it, they will create a new object with this name and fill it with default values.  Is this what you want?
+MB_UNABLE_TO_FIND_MEM_ALLOC	Unable to find memory allocation interface.
+MB_UNABLE_TO_OPEN_HELP	Unable to open help file.
+MB_UNRECOG_OBJ_TYPE	Unrecognized object type.
+MB_UNRECOG_TAG_IN	Unrecognized tag '%s' in %s.
+**
+MB_UNRECOG_UPDATE_COMMAND	Unrecognized update command.
+MB_WANT_TO_SAVE	Do you want to save the %s %s?
+MB_UNRECOGNIZED_GENERAL	Unrecognized %s in %s
+MB_PROBLEM_NUM_IN_ROUTINE	Problem #%s in %s
+MB_HORIZ_INVALID	You cannot adjust the slope length from this entry, so the values are being adjusted to match the slope length.\n\nIf you wish to change the slope length, use either the slope length or the topography entries.
+MB_PROBLEMS_READING_ABORT	Problems reading %s.\n\n%s\n\nThe problems are severe enough that the file will not be saved.  Check this file using RUSLE1.
+MB_UNIQUE_OBJT_WITH_DEF_FILE	This object type %s is defined as a "unique" object, so it will be filled only once from the hard-coded values.  The default file value provided in the catalog will be ignored.
+**
+OPTIONS_AUTO_RECALC	You may want to turn this off for extensive data entry
+

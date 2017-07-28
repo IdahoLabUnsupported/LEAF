@@ -1,0 +1,102 @@
+# Copyright 2016 Battelle Energy Alliance, LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+#pragma once
+
+#define LEAF_MAJOR_VERSION    @LEAF_MAJOR_VERSION@
+#define LEAF_MINOR_VERSION    @LEAF_MINOR_VERSION@
+#define LEAF_PATCH_VERSION    @LEAF_PATCH_VERSION@
+
+#if defined( _MSC_VER )
+    #pragma warning( disable : 4503 )
+    #pragma warning( disable : 4251 )
+#endif
+
+#if defined ( _MSC_VER ) || \
+    defined ( __CYGWIN__ ) || \
+    defined ( __MINGW32__ ) || \
+    defined ( __BCPLUSPLUS__ ) || \
+    defined ( __MWERKS__ )
+
+    #if defined ( LEAF_UTIL_LIBRARY )
+        #define LEAF_UTIL_EXPORTS __declspec( dllexport )
+    #else
+        #define LEAF_UTIL_EXPORTS __declspec( dllimport )
+    #endif
+
+    #if defined ( LEAF_OPEN_LIBRARY )
+        #define LEAF_OPEN_EXPORTS __declspec( dllexport )
+    #else
+        #define LEAF_OPEN_EXPORTS __declspec( dllimport )
+    #endif
+
+    #if defined ( LEAF_DAYCENT_LIBRARY )
+        #define LEAF_DAYCENT_EXPORTS __declspec( dllexport )
+    #else
+        #define LEAF_DAYCENT_EXPORTS __declspec( dllimport )
+    #endif
+
+    #if defined ( LEAF_JAVA_LIBRARY )
+        #define LEAF_JAVA_EXPORTS __declspec( dllexport )
+    #else
+        #define LEAF_JAVA_EXPORTS __declspec( dllimport )
+    #endif
+
+    #if defined ( LEAF_POWERSIM_LIBRARY )
+        #define LEAF_POWERSIM_EXPORTS __declspec( dllexport )
+    #else
+        #define LEAF_POWERSIM_EXPORTS __declspec( dllimport )
+    #endif
+
+    #if defined ( LEAF_RUSLE2_LIBRARY )
+        #define LEAF_RUSLE2_EXPORTS __declspec( dllexport )
+    #else
+        #define LEAF_RUSLE2_EXPORTS __declspec( dllimport )
+    #endif
+
+    #if defined ( LEAF_WEPS_LIBRARY )
+        #define LEAF_WEPS_EXPORTS __declspec( dllexport )
+    #else
+        #define LEAF_WEPS_EXPORTS __declspec( dllimport )
+    #endif
+
+    #if defined ( LEAF_ALM_LIBRARY )
+        #define LEAF_ALM_EXPORTS __declspec( dllexport )
+    #else
+        #define LEAF_ALM_EXPORTS __declspec( dllimport )
+    #endif
+
+#else
+    #define LEAF_UTIL_EXPORTS
+    #define LEAF_OPEN_EXPORTS
+    #define LEAF_OPEN_EXPORTS
+    #define LEAF_OPEN_EXPORTS
+    #define LEAF_OPEN_EXPORTS
+    #define LEAF_DAYCENT_EXPORTS
+    #define LEAF_JAVA_EXPORTS
+    #define LEAF_POWERSIM_EXPORTS
+    #define LEAF_RUSLE2_EXPORTS
+    #define LEAF_WEPS_EXPORTS
+    #define LEAF_ALM_EXPORTS
+#endif
+
+#if defined( _MSC_VER )
+    #define KIBITZ_DEPRECATED( x ) __declspec( deprecated ) x
+#else
+    #define KIBITZ_DEPRECATED( x ) x __attribute__ ( ( deprecated ) )
+#endif
+
+#@POCO_MYSQL_API_DEFINE@ POCO_MYSQL_API
+#@POCO_ODBC_API_DEFINE@ POCO_ODBC_API

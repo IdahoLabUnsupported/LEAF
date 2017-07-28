@@ -1,0 +1,415 @@
+<!--
+ External DTD for validating XML catalogs used by Rusle2.
+ The XML "catalog" defines the elements of the scientific model.
+ It is loaded on application startup, either from a binary resource or a compiled-in string constant.
+ Instances are created at runtime from these catalog listing entries.
+ The catalog doesn't specify the appearance of the model - that is specified by user templates.
+ The structure of the catalog XML document largely mirrors that of the XML data files described in "data.dtd".
+
+ The following DOCTYPE entry is only used in an internal DTD.
+ <!DOCTYPE Catalog [
+-->
+
+    <!-- The "Catalog" is the description of the scientific model.
+         Model   - A named subcomponent of the full model.
+		             For historical reasons the is divided into the "shared" model,
+                     which contains generic model parameters, and the "RUSLE2" model.
+                     This attribute is not currently used when read.
+         Science - This is a decimal version number in format YYYYMMDD.
+                     It represents the time of the last signifigant science change.
+                     It may remain the same between different minor Rusle2 versions.
+      -->
+    <!ELEMENT Catalog (Objects | Obj | Sub | CalcFns | InterlockFns | Comment)* >
+    <!ATTLIST Catalog Model     NMTOKEN #IMPLIED
+                      Science   NMTOKEN #IMPLIED >
+
+    <!-- The "Objects" collection list all object types recognized by the model.
+         This _declares_ the objects, before they are _defined_ individually below.
+         It may contain any number of "Obj" or "Sub" entries.
+         The "Group" elements are used to group the other elements by object type.
+      -->
+    <!ELEMENT Objects (Obj | Sub | Group | Comment)*>
+
+    <!-- Custom entity for the different elements used by parameter definitions.
+	     This is useful because any parameter type may be contained in any object type.
+      -->
+    <!ENTITY % ParamTags "Bit | Bol | Dte | Flt | Int | Lst | ObR | Ovr | Pic | RmtUp | Rmt | SbR | Sta | Str" >
+
+    <!-- An "Obj" is a _file_ level object. It may generally be saved in the database.
+	     It behaves almost identically to a "Sub" object, which may not be save directly in the database.
+		 "Obj" objects are generally declared at global scope in this DTD.
+		 "Sub" objects are generally declared inside the object type that they are used in.
+		   This is a convention, and not used by the loading code. In fact, many subobjects may
+		   do not have a unique object type that they are used in.
+		 All parameters contained in an object must be defined inside the object's definition.
+		   It is not valid to define a parameter more than once though, so the element <AllowAttr>
+		   can be used in other object definitions to declare that it can occur in them.
+         Name    The internal Rusle2 name for the object type (e.g. "CLIMATE").
+         Ext     A file extension (for internal use, and for exported XML files).
+         Bit     The name of the bitmap to use for this object type.
+                 This has format "res://bitmap-name" for internal (resource) bitmaps.
+                 For external bitmaps it is a filename relative to the Rusle2\Users directory.
+                 Bitmap names (the part after "res://") and filenames are case-insensitive.
+         Btn     The resource ID of the toolbar button for this object type.
+                 This should be 0 for non-file objects that don't show on the toolbar.
+         Table   The database table name used to store this object type (e.g. "climates")
+         Flags   Flags of type enum ObjTypeFlags. Default value is OBJT_NONE.
+                 Flags are separated by whitespace and | characters.
+      -->
+    <!ELEMENT Obj (Sub | AllowAttr|StartFn|CleanupFn | CalcFn|InterlockFn|ValFn|ForceUniquePointers | Comment|Group|r2if | Flags|Choices | %ParamTags;)* >
+    <!ATTLIST Obj   Name    CDATA   #REQUIRED
+                    Ext     CDATA    #IMPLIED
+                    Bit     CDATA    #IMPLIED
+                    Btn     CDATA    #IMPLIED
+                    Table   CDATA    #IMPLIED
+                    Flags   CDATA    #IMPLIED
+    >
+
+    <!-- A subobject is an object type that cannot be saved directly in the database.
+	     (See comments for the "Obj" element.)
+      -->
+    <!ELEMENT Sub (Sub | AllowAttr|StartFn|CleanupFn | CalcFn|InterlockFn|ValFn|ForceUniquePointers | Comment|Group|r2if | Flags|Choices | %ParamTags;)* >
+    <!ATTLIST Sub   Name    CDATA   #REQUIRED
+                    Flags   CDATA    #IMPLIED >
+
+    <!-- This element is a proxy for "xsl:if", which we will eventually replace it with. -->
+    <!ELEMENT r2if ANY>
+    <!ATTLIST r2if test CDATA #REQUIRED >
+
+    <!-- ******************************************************************* -->
+
+    <!-- Allow a parameter to occur in a diferent [sub]object.
+      This is used to declare promoted parameters, and to share the definition
+      of parameters which are used in multiple subobjects of similar types.
+      -->
+    <!ELEMENT AllowAttr EMPTY >
+    <!ATTLIST AllowAttr
+        Attr    CDATA    #IMPLIED
+    >
+
+    <!-- This is used to comment-out parts of the catalog.
+	     These comments elements can nest, which normal XML comments can't.
+	  -->
+    <!ELEMENT Comment   ANY >
+
+    <!-- Each object type may have a single _start function_.
+	     This function is run on object creation to initialize it.
+         The Rusle2 computational engine performs lazy evaluation based on
+		   changes to parameters which are declared to be "terms" of a calc function.
+		 Normally, a visual in the graphical user interface causes the creation of a parameter,
+		   which in turns run its calc function, and builds these term relationships.
+		 The start function allows building these term relationships in the absence of a visual interface.
+	  -->
+    <!ELEMENT StartFn   EMPTY >
+    <!ATTLIST StartFn
+        Name    CDATA   #REQUIRED
+    >
+
+    <!-- A _cleanup function_ is run on loading a saved data file.
+	  -->
+    <!ELEMENT CleanupFn ANY >
+    <!ATTLIST CleanupFn
+        Attr    CDATA    #IMPLIED
+        Name    CDATA   #REQUIRED
+        Code    CDATA    #IMPLIED
+    >
+
+    <!-- An _interlock_function_ is used to enforce a constraint on a set of parameters.
+	     The standard example is the set SAND,SILT,CLAY, which must add up to 1.
+		 Each parameter may have a single [optional] interlock function.
+		 No parameter may belong to more than one interlock function.
+		 An interlock function will generally be declared for all parameters that it affects.
+		 A parameter by have both a calc function and an interlock function.
+		 Attr - The name of the parameter to which this function is being added.
+		        If the Attr attribute isn't present, it is assumed to be the parameter
+				whose definition immediately precedes the function's definition.
+		 Name - The internal name (identifier) of the function.
+		 Code - The name of the function implementation in the C++ code.
+	  -->
+    <!ELEMENT InterlockFn (Param*) >
+    <!ATTLIST InterlockFn
+        Attr    CDATA    #IMPLIED
+        Name    CDATA   #REQUIRED
+        Code    CDATA    #IMPLIED
+        Flags   CDATA    #IMPLIED
+   >
+
+    <!-- A _validation_function_ is used to enforce constraints user input to a parameter.
+		 Each parameter may have a single [optional] validation function.
+		 Attr - The name of the parameter to which this function belongs.
+		        If the Attr attribute isn't present, it is assumed to be the parameter
+				whose definition immediately precedes the function's definition.
+		 Name - The internal name (identifier) of the function.
+		 Code - The name of the function implementation in the C++ code.
+	  -->
+    <!ELEMENT ValFn EMPTY >
+    <!ATTLIST ValFn
+        Attr    CDATA    #IMPLIED
+        Name    CDATA   #REQUIRED
+        Code    CDATA    #IMPLIED
+    >
+
+    <!-- A _calc_function_ is the basic unit of computation in Rusle2.
+		 Each parameter may have a single [optional] calc function.
+		 A parameter by have both a calc function and an interlock function.
+		 Attr - The name of the parameter which this function has as an output.
+		        If the Attr attribute isn't present, it is assumed to be the parameter
+				whose definition immediately precedes the function's definition.
+		 Name - The internal name (identifier) of the function.
+		 Code - The name of the function implementation in the C++ code.
+	  -->
+    <!ELEMENT CalcFn ANY >
+    <!ATTLIST CalcFn
+        Attr    CDATA    #IMPLIED
+        Name    CDATA   #REQUIRED
+        Code    CDATA    #IMPLIED
+    >
+
+    <!-- "ObR" parameters hold filenames, and are usually allowed to contain duplicates.
+	     If this element is declared for a parameter, then it is NOT allowed to contain
+		 duplicate entries. When a duplicate entry would be inserted, that file cloned instead.
+		 Attr - The name of the parameter to declare as having unique pointers.
+	  -->
+    <!ELEMENT ForceUniquePointers   EMPTY >
+    <!ATTLIST ForceUniquePointers
+        Attr    CDATA   #REQUIRED
+    >
+
+    <!-- ******************************************************************* -->
+
+    <!-- The "InterlockFns" collection lists interlock functions used by the model.
+         This _declares_ the functions, before they are added for individually parameters below.
+		 (Declaring an interlock function in this element is currently optional.)
+         The "Group" elements are currently just used to group the other elements for documentation purposes.
+      -->
+    <!ELEMENT InterlockFns (InterlockFn | Group|Comment)* >
+
+    <!-- The "CalcFns" collection lists calc functions used by the model.
+         This _declares_ the functions, before they are added for individually parameters below.
+         The "Group" elements are used to group the other elements by object type.
+      -->
+    <!ELEMENT CalcFns      (Fn | Group|Comment)* >
+
+    <!-- A _calc_function_ is the basic unit of computation in Rusle2.
+	     This element declares a calc function before it is associated with a parameter.
+		 Each parameter may have a single [optional] calc function.
+		 Attr - The name of the parameter which this function has as an output.
+		        If the Attr attribute isn't present, it is assumed to be the parameter
+				whose definition immediately precedes the function's definition.
+		 Name - The internal name (identifier) of the function.
+		 Code - The name of the function implementation in the C++ code.
+		 Flag - Named flags which modify the functions behavior.
+	  -->
+    <!ELEMENT Fn          (Terms?, Affecteds?, Param*) >
+    <!ATTLIST Fn
+        Attr    CDATA    #IMPLIED
+        Name    NMTOKEN #REQUIRED
+        Code    CDATA    #IMPLIED
+        Flags   CDATA    #IMPLIED
+    >
+
+	<!-- These are collections used to group the corresponding singular elements. -->
+    <!ELEMENT Affecteds (Affected*) >
+    <!ELEMENT Terms     (Term*) >
+
+    <!ELEMENT Affected  (#PCDATA) >
+    <!ELEMENT Term      (#PCDATA) >
+
+    <!ELEMENT Param     EMPTY>
+    <!ATTLIST Param
+        Name    NMTOKEN #REQUIRED
+    >
+
+    <!-- ******************************************************************* -->
+
+    <!-- "Group" elements are used to group other elements by object type. -->
+    <!ELEMENT Group     ANY >
+    <!ATTLIST Group
+        Obj     CDATA    #IMPLIED
+        Sub     CDATA    #IMPLIED
+    >
+
+    <!-- This element lists flags used to modify behavior of a parameter.
+       ACF_NO_USER_SIZE   - User can't resize (the program may)
+	   ACF_NO_USER_EDIT   - User can't edit (the program may)
+	   ACF_INTEGRAL       - This is an integer (was a display flag in visual pref)
+	   ACF_ALLOW_NONE     - Allow entry ENTRY_NONE, "(none)" by user
+	   ACF_ALLOW_CUSTOM   - Allow value ENTRY_CUSTOM, "(custom)", only set by code
+	   ACF_NO_SET_CHANGED - Doesn't set the file dirty if param changes.
+	   ACF_NO_NAN         - Don't allow entry NaN (which is empty string for some parameters)
+	   ACF_ALLOW_INTERNAL - Allow value ENTRY_INTERNAL, "(internal)", which allows using internal files
+	  -->
+    <!ELEMENT Flags     ANY>
+
+    <!-- Lists a finite set of named string values that a parameter can take on.
+		 It contains a comma-separated list of double-quoted names.
+	     Used by "Lst" elements (list parameters) to list legal values.
+	     Used by "SbR" elements (subobject parameters) to list legal object types.
+		 Attr - The name of the parameter which this list applies to.
+	  -->
+    <!ELEMENT Choices   ANY>
+    <!ATTLIST Choices   Attr    CDATA    #IMPLIED >
+
+    <!-- ******************************************************************* -->
+    <!-- Parameter Defintions
+      These tags are the same as those save in Rusle2 xml data files.
+     -->
+
+    <!ELEMENT Bit   EMPTY> <!-- Bitmap   -->
+    <!ELEMENT Bol   EMPTY> <!-- Boolean  -->
+    <!ELEMENT Dte   EMPTY> <!-- Date     -->
+    <!ELEMENT Flt   EMPTY> <!-- Float    -->
+    <!ELEMENT Int   EMPTY> <!-- Integer  -->
+    <!ELEMENT Lst   EMPTY> <!-- List     -->
+    <!ELEMENT ObR   EMPTY> <!-- Pointer  -->
+    <!ELEMENT Ovr   EMPTY> <!-- Override -->
+    <!ELEMENT Pic   EMPTY> <!-- Picture  -->
+    <!ELEMENT Rmt   EMPTY> <!-- Remote   -->
+    <!ELEMENT SbR   EMPTY> <!-- SubPtr   -->
+    <!ELEMENT Sta   EMPTY> <!-- Static   -->
+    <!ELEMENT Str   EMPTY> <!-- String   -->
+
+    <!-- This tag is used to declare a "remote up", which is an abbreviated
+         form for declaring a remote parameter <Rmt>.
+      -->
+    <!ELEMENT RmtUp EMPTY>
+
+	<!-- Attributes shared by the parameter definitions:
+	     (Not all attributes are legal in all parameter elements.)
+	     Name    - name (identifier) of the parameter.
+		 Fn      - name of the parameter's calc function. (can be empty)
+		 Unit    - name of the parameter's default unit.  (can be empty)
+		 Default - default value for this parameter.
+		 Min     - minimum legal value for this parameter.
+		 Max     - maximum legal value for this parameter.
+		 Obj     - object type for a pointer parameter.
+		 RemAttr - name of the remote parameter pointed to.
+		 PtrAttr - name of the pointer parameter to remote through.
+		 d0      - name of the parameter's 1st dimension. (can be empty)
+		 d1      - name of the parameter's 2nd dimension. (can be empty)
+	  -->
+
+    <!-- Parameter Attributes -->
+    <!ATTLIST Bit
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        Unit    CDATA    #IMPLIED
+        d0      CDATA    #IMPLIED
+        d1      CDATA    #IMPLIED
+    >
+
+    <!ATTLIST Bol
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        Unit    CDATA    #IMPLIED
+        Default CDATA    #IMPLIED
+        d0      CDATA    #IMPLIED
+        d1      CDATA    #IMPLIED
+    >
+
+    <!ATTLIST Dte
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        Unit    CDATA    #IMPLIED
+        Min     CDATA   #REQUIRED
+        Max     CDATA   #REQUIRED
+        Default CDATA   #REQUIRED
+        d0      CDATA    #IMPLIED
+        d1      CDATA    #IMPLIED
+    >
+
+    <!ATTLIST Flt
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        Unit    CDATA    #IMPLIED
+        Min     CDATA   #REQUIRED
+        Max     CDATA   #REQUIRED
+        Default CDATA   #REQUIRED
+        d0      CDATA    #IMPLIED
+        d1      CDATA    #IMPLIED
+    >
+
+    <!ATTLIST Int
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        Unit    CDATA    #IMPLIED
+        Min     CDATA   #REQUIRED
+        Max     CDATA   #REQUIRED
+        Default CDATA   #REQUIRED
+        d0      CDATA    #IMPLIED
+        d1      CDATA    #IMPLIED
+    >
+
+    <!ATTLIST Lst
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        Unit    CDATA    #IMPLIED
+        Default CDATA    #IMPLIED
+        d0      CDATA    #IMPLIED
+        d1      CDATA    #IMPLIED
+    >
+
+    <!ATTLIST ObR
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        Unit    CDATA    #FIXED     ""
+        Default CDATA    #IMPLIED
+        Obj     CDATA   #REQUIRED
+        d0      CDATA    #IMPLIED
+        d1      CDATA    #IMPLIED
+    >
+
+    <!ATTLIST Ovr
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        RemAttr CDATA   #REQUIRED
+        PtrAttr CDATA   #REQUIRED
+        d0      CDATA    #IMPLIED
+    >
+
+    <!ATTLIST Pic
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        Unit    CDATA    #FIXED     ""
+        Default CDATA    #IMPLIED
+        d0      CDATA    #IMPLIED
+        d1      CDATA    #IMPLIED
+    >
+
+    <!ATTLIST Rmt
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #FIXED     ""
+        RemAttr CDATA   #REQUIRED
+        PtrAttr CDATA   #REQUIRED
+    >
+
+    <!ATTLIST RmtUp
+        Name    CDATA   #REQUIRED
+        RemAttr CDATA   #REQUIRED
+    >
+
+    <!ATTLIST SbR
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        Default CDATA   #REQUIRED
+        d0      CDATA    #IMPLIED
+        d1      CDATA    #IMPLIED
+    >
+
+    <!ATTLIST Sta
+        Name    CDATA   #REQUIRED
+    >
+
+    <!ATTLIST Str
+        Name    CDATA   #REQUIRED
+        Fn      CDATA    #IMPLIED
+        Unit    CDATA    #IMPLIED
+        Default CDATA    #IMPLIED
+        d0      CDATA    #IMPLIED
+        d1      CDATA    #IMPLIED
+    >
+
+<!--
+ The following close delimiter is only used in internal DTDs.
+ ]>
+-->

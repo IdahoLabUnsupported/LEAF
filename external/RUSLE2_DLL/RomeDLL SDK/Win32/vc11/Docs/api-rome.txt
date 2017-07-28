@@ -1,0 +1,792 @@
+// Documentation of the RomeDLL API.
+// Extracted from the source documentation in "api-rome.cpp".
+
+Most functions in the IRome Automation API have a corresponding function in the DLL API.
+The mapping is rather straightforward:
+  I<ClassName>::<FnName>() --> Rome<className><FnName>().
+  Example: with IFile::Save() --> RomeFileSave().
+The following are exceptions:
+  IRome::Run()           RomeEngineRun()
+  IRome::SetStatusBar()  RomeStatusbarMessage()
+  IRome::GetAutorun()    RomeEngineGetAutorun()
+  IRome::SetAutorun()    RomeEngineSetAutorun()
+  IDatabase::Find()      RomeDatabaseFind()
+  IDatabase::FindItem()  RomeDatabaseFindInfo()
+The "Find" functions have been changed to support thread-safe behavior, so the
+  way in which they are called has changed. RomeDatabaseFindOpen() is used to 
+  obtain a search result set context, which is then queried by API functions.
+  When the search result set is no longer needed, it must be closed with 
+  RomeDatabaseFindClose().
+The status bar is now "write-only". There is no function to read its current 
+  string value, corresponding to the readable IRome::Statusbar property.
+
+/////////////////////////////////////////////////////////////////////////////
+// Application level functions
+
+// Return a pointer to an abstract database interface.
+// Note: This will return a non-NULL pointer, even if a database hasn't been opened
+//   using RomeDatabaseOpen(). The pointer represents the abstract interface itself,
+//   not the database connection.
+// Returns NULL on error.
+//
+ROME_API RT_Database* RomeGetDatabase(RT_App* pApp)
+
+// Return a full Win32 path under the Rusle2 root directory.
+// If the directory has been redirected somewhere else,
+//   then that location will be returned instead.
+// <pszPath> a path (or file) name relative to the root directory.
+//   The name argument is case-insensitive.
+//   Only standard subdirectory names may be redirected:
+//     Binaries, Export, Import, Session, Users, Temp.
+//   Examples:
+//    Binaries
+//    Export\
+//    Import\database-name.gdb
+//    Session\Temp
+// If the path starts with an unrecognized directory, it is appended as a
+//   subfolder of the root directory.
+// The root directory is returned on NULL or empty string.
+// This operates successfully on files and folders which don't exist.
+// Returns NULL on failure.
+//
+ROME_API RT_CSTR RomeGetDirectory(RT_App* pApp, LPCSTR pszPath /*= NULL*/)
+
+// Return a named Win32 directory under the Rusle2 root directory.
+// See RomeGetDirectory() above for full documentation.
+//
+// This version required for use by Intel Fortran, which can't use functions
+//   which return a string pointer. Instead it must have its first 2 arguments
+//   be a pointer to a buffer and its length, to return the string in.
+//   The function must have a return type of void.
+// <pBuf> is the pointer to a buffer to return a NUL-terminated string in.
+// <nBufLen> is the length of the buffer to return a NUL-terminated string in.
+//
+ROME_API RT_VOID RomeGetDirectoryF(RT_PCHAR pBuf, RT_UINT nBufLen, RT_App* pApp, RT_CSTR pszName /*= NULL*/)
+
+// Return a pointer to an abstract engine interface.
+// Returns NULL on failure.
+//
+ROME_API RT_Engine* RomeGetEngine(RT_App* pApp)
+
+// Return a pointer to an abstract filesystem interface.
+// Returns NULL on failure.
+//
+ROME_API RT_Files* RomeGetFiles(RT_App* pApp)
+
+// Get string properties of the app.
+// <nProp> the property to get.
+// RX_PROPERTYSTR_APPFULLNAME
+//   Return the full filename of the application executable, including path.
+//   Example: "C:\Program Files\Rusle2\Binaries\Rusle2.exe".
+// RX_PROPERTYSTR_APPNAME
+//   Return the English name (title) of the application.
+//   Example: "Rusle2".
+// RX_PROPERTYSTR_APPPATH
+//   Return the path to the application executable.
+//   Example: "C:\Program Files\Rusle2\Binaries".
+// RX_PROPERTYSTR_DBAUTHOR
+//   Return the global "owner" field of the database.
+// RX_PROPERTYSTR_DBCOMMENTS
+//   Return the global "info" field of the database.
+// RX_PROPERTYSTR_DBDATE
+//   Return the global "date" field of the database.
+// RX_PROPERTYSTR_DBFULLNAME
+//   Get the full filename of the database, including directory.
+// RX_PROPERTYSTR_DBNAME
+//   Get the short filename of the database.
+//   Example: "moses.gdb".
+// RX_PROPERTYSTR_DBPATH
+//   Get the full path of the database.
+//   Example: "C:\Program Files\Rusle2".
+//
+// Returns NULL on failure.
+//
+ROME_API RT_CSTR RomeGetPropertyStr(RT_App* pApp, UINT nProp)
+
+// Get string properties of the app.
+// See RomeGetPropertyStr() above for full documentation.
+//
+// This version required for use by Intel Fortran, which can't use functions
+//   which return a string pointer. Instead it must have its first 2 arguments
+//   be a pointer to a buffer and its length, to return the string in.
+//   The function must have a return type of void.
+// <pBuf> is the pointer to a buffer to return a NUL-terminated string in.
+// <nBufLen> is the length of the buffer to return a NUL-terminated string in.
+//
+ROME_API RT_VOID RomeGetPropertyStrF(RT_PCHAR pBuf, RT_UINT nBufLen, RT_App* pApp, UINT nProp)
+
+// Return the "science version" of the application.
+// This is an integer whose decimal form is YYYYMMDD, which represents
+//   the date of the last signifigant science change to the model.
+// This science version is stored in files when they are saved.
+// Returns zero (0) on error.
+//
+ROME_API RT_UINT RomeGetScienceVersion(RT_App* pApp)
+
+// Return a pointer to an abstract statusbar interface.
+// Returns NULL on failure.
+//
+ROME_API RT_Statusbar* RomeGetStatusbar(RT_App* pApp)
+
+// Return a title string for a title key.
+// "pszKey" is the key to lookup.
+//   There are some special values that can be used:
+//   #APPVERSION       - the version of the calling application.
+//   #APPNAME          - the name of the calling application.
+//   #BUILDDATE        - the date the core [science] code was compiled.
+//   #BUILDTIME        - the time the core [science] code was compiled.
+//   #ROMEVERSION      - the version of the core Rome code (may be EXE or DLL)
+//   #ROMENAME         - the name of the core Rome module (may be EXE or DLL)
+//   #SCIENCEVERSION   - the version of the core Rome model, in format YYYYMMDD
+//   #STARTTIME        - the startup time of the current run.
+//   #VERSION_TOMCRYPT - the version of the TOMCRYPT library used (as DLL or compiled in)
+//   #VERSION_ZLIB     - the version of the ZLIB library used (as DLL or compiled in)
+//   See document "Rusle2 Translation Titles.rtf" for more information.
+// This function is also used as a backdoor to add functions to the Rome API
+//   without having to add new exported functions.
+//   Special keys handled:
+//   Filename1:Filename2:#XML_FILE_COMPARE
+//     Do a diff between 2 XML files.
+//   AttrName:#ATTR_UNITS
+//     Return the title of the current template unit for this parameter.
+//     The parameter name can be a "remote name" (e.g. "#RD:CLIMATE_PTR:EI_10YEAR").
+//   UnitTestCanRun:TestName
+//     Return "1" if UnitTestCanRun(TestName) is TRUE, otherwise NULL.
+// Returns NULL on failure.
+//
+ROME_API RT_CSTR RomeGetTitle(RT_App* pApp, LPCSTR pszKey)
+
+// Return a title string for a title key.
+// See RomeGetTitle() above for full documentation.
+//
+// This version required for use by Intel Fortran, which can't use functions
+//   which return a string pointer. Instead it must have its first 2 arguments
+//   be a pointer to a buffer and its length, to return the string in.
+//   The function must have a return type of void.
+// <pBuf> is the pointer to a buffer to return a NUL-terminated string in.
+// <nBufLen> is the length of the buffer to return a NUL-terminated string in.
+//
+ROME_API RT_VOID RomeGetTitleF(RT_PCHAR pBuf, RT_UINT nBufLen, RT_App* pApp, LPCSTR pszKey)
+
+// Get error information set by the API.
+// This function may be called when an API function returns an error value.
+// This may return additional information in text format.
+// This information string is currently thread-specific.
+// Returns NULL on failure.
+//
+// See: RomeSetLastError()
+//
+ROME_API RT_CSTR RomeGetLastError(RT_App* pApp)
+
+// Set additional error information for an API error.
+// This information is retrieved by RomeGetLastError().
+// Note that it may be overwritten if not retrieved directly after it is set.
+// This information string is currently thread-specific.
+// <pszInfo> the text error description.
+//   If this is NULL the error information will be cleared.
+//   If the string starts with a special character, then
+//   '+'  the text will be appendend  to the current string as a new line.
+//   '-'  the text will be prependend to the current string as a new line.
+//   '='  the text will replace the current string.
+//   If the string doesn't start with a special character, then whether the string replaces the old
+//     one or is affixed in some way depends on compile-time settings of this function.
+// Returns TRUE on success, FALSE on failure or error.
+//
+// See: RomeGetLastError()
+//
+ROME_API RT_BOOL RomeSetLastError(RT_App* pApp, RT_CSTR pszInfo)
+
+// Call when finished using the app context to access the API.
+// <pApp> the pointer returned by RomeInit().
+// Returns TRUE on succcess, FALSE on failure.
+//
+// See: RomeInit().
+//
+ROME_API RT_BOOL RomeExit(RT_App* pApp)
+
+// Initialize the Rome API for use.
+// This function returns a context pointer required by most Rome API functions.
+//   Call RomeExit() on this pointer when finished with it.
+// <pszArgs> Command-line argument string used to configure the DLL.
+//   Arguments are separated by spaces. In order to contain spaces or
+//     other special characters, arguments should be double-quoted.
+//   This string may be NULL or empty.
+//   The first argument is assumed to be the name of the calling app, and is ignored.
+//   /DirRoot=...        The root directory ... to use for the all files.
+//   /Path:<name>=<path> The file/folder <name> is redirected to the Win32 <path>.
+//   /UnitSystem=<name>  The system of units to use initially.
+//      US                 the English/British unit system
+//      SI                 the metric unit system
+//                       If the <name> part is empty, it will use SI units.
+//                       2007-10-08 If no unit system is specified, it will default to US units.
+//                       2007-10-08 An unrecognized unit system name is now ignored.
+// Returns NULL on failure.
+//
+ROME_API RT_App* RomeInit(RT_CSTR pszArgs)
+
+
+/////////////////////////////////////////////////////////////////////////////
+// RomeDatabase functions
+
+// Close a named database.
+// "pszDatabase" is the name of the database file to close.
+//   Currently this argument is ignored. It will be used when Rusle2 has the ability
+//   to open multiple database simultaneously.
+// This will fail if there are files open that need to be closed first.
+// Returns TRUE on success, FALSE on failure.
+//
+// See: RomeDatabaseOpen().
+//
+ROME_API RT_BOOL RomeDatabaseClose(RT_Database* pDatabase, LPCSTR pszDatabase /*= NULL*/)
+
+// Delete a file record from the database.
+// <pszPathname> is the name of the file. (e.g. "soils\default")
+// <nFlags> flags which affect its behavior.
+//   This argument is currently ignored.
+// Returns TRUE on success, FALSE on failure.
+//
+ROME_API RT_BOOL RomeDatabaseFileDelete(RT_Database* pDatabase, RT_CSTR pszPathname, RT_UINT nFlags)
+
+// Retrieve information about a file in the database.
+// <pszFilename> is the name of the file. (e.g. "soils\default")
+// <nInfoType> is the type of information to retrieve.
+//   RX_DBFILEINFO_QUERY	 0 // (string result of query)
+//   RX_DBFILEINFO_NAME		 1 //            name
+//   RX_DBFILEINFO_PATH		 2 //       path
+//   RX_DBFILEINFO_RIGHT	 3 //       path\name
+//   RX_DBFILEINFO_TABLE	 4 // table
+//   RX_DBFILEINFO_OUTER	 5 // table\     name
+//   RX_DBFILEINFO_LEFT		 6 // table\path
+//   RX_DBFILEINFO_FULL		 7 // table\path\name
+//   RX_DBFILEINFO_OWNER	 8 // owner field
+//   RX_DBFILEINFO_GROUP	 9 // group field
+//   RX_DBFILEINFO_PERMS	10 // perms field
+//   RX_DBFILEINFO_DATE		11 // date  field
+//   RX_DBFILEINFO_DATA		12 // data  field
+//   RX_DBFILEINFO_FOLDER	13 // is this a folder? return "0" or "1".
+// Returns NULL on failure.
+//
+ROME_API RT_CSTR RomeDatabaseFileInfo(RT_Database* pDatabase, LPCSTR pszFilename, UINT nInfoType)
+
+// Retrieve information about a file in the database.
+// See RomeDatabaseFileInfo() above for full documentation.
+//
+// This version required for use by Intel Fortran, which can't use functions
+//   which return a string pointer. Instead it must have its first 2 arguments
+//   be a pointer to a buffer and its length, to return the string in.
+//   The function must have a return type of void.
+// <pBuf> is the pointer to a buffer to return a NUL-terminated string in.
+// <nBufLen> is the length of the buffer to return a NUL-terminated string in.
+//
+ROME_API RT_VOID RomeDatabaseFileInfoF(RT_PCHAR pBuf, RT_UINT nBufLen, RT_Database* pDatabase, LPCSTR pszFilename, UINT nInfoType)
+
+// Get the Rome app interface from the database interface.
+// Returns NULL on failure.
+//
+ROME_API RT_App* RomeDatabaseGetApp(RT_Database* pDatabase)
+
+// Get the read-only state of the database.
+// Note: this can be read-only for many reasons:
+// - the database file is read-only.
+// - the database file is on a read-only filesystem.
+// - the user only has read access to the database.
+// - the connection has been set to read-only programmatically.
+// Returns FAILURE on error.
+//
+ROME_API RT_BOOL RomeDatabaseGetReadOnly(RT_Database* pDatabase)
+
+// Open a new database for use with Rusle2.
+// "pszDatabase" is the fullname of the database file to open on disk.
+//   The argument "#DefaultDatabase" (case-insensitive)
+//     will open the default database (usually "moses.gdb").
+// This will fail if there are files open that need to be closed first.
+// Returns TRUE on success, FALSE / FAILURE on failure.
+//
+// See: RomeDatabaseClose().
+//
+ROME_API RT_BOOL RomeDatabaseOpen(RT_Database* pDatabase, LPCSTR pszDatabase)
+
+
+/////////////////////////////////////////////////////////////////////////////
+// RomeDatabase search functions
+
+// Start a new search and return a pointer to the Find result set.
+// The results are accessed using RomeDatabaseFindInfo().
+// The Find result set must be closed using RomeDatabaseFindClose() when
+//   you are finished with it.
+// <pszPattern> is the pattern to search with. Its meaning varies
+//   depending on <nFindFlags>. It generally is the table or folder
+//   to search in. If it is NULL or empty, it means all tables.
+// <nFindFlags> are flags that control the search type.
+//   RX_DBFIND_FILES		1<<0	// Match file names
+//   RX_DBFIND_FOLDERS		1<<1	// Match folder names
+//   RX_DBFIND_RECURSE		1<<2	// Recurse into subdirectories.
+//   RX_DBFIND_ADDROOT		1<<3	// Add the root to the search results
+//   RX_DBFIND_EXACT		1<<4	// Find single record matching argument string
+//   RX_DBFIND_TABLES		1<<10	// Find all tables in the database
+//   RX_DBFIND_QUERY		2<<10	// The pattern string is a SQL query.
+// Returns NULL on failure.
+//
+// See: RomeDatabaseFindClose(), RomeDatabaseFindCount(), RomeDatabaseFindInfo().
+//
+ROME_API RT_DBFIND* RomeDatabaseFindOpen(RT_Database* pDatabase, RT_CSTR pszPattern, RT_UINT nFindFlags)
+
+// Close a Find result set.
+// Result sets are dynamic objects that must be closed when you are finished using them.
+// <pDbFind> is the Find result set returned by RomeDatabaseFindOpen().
+//
+// See: RomeDatabaseFindOpen().
+//
+ROME_API RT_VOID RomeDatabaseFindClose(RT_DBFIND* pDbFind)
+
+// Return the number of items in the current Find result set.
+// <pDbFind> is the Find result set returned by RomeDatabaseFindOpen().
+// Returns 0 on error or if none found.
+//
+// See: RomeDatabaseFindOpen(), RomeDatabaseFindClose().
+//
+ROME_API RT_INT RomeDatabaseFindCount(RT_DBFIND* pDbFind)
+
+// Access individual results in a find result set.
+// <pDbFind> is the Find result set returned by RomeDatabaseFindOpen().
+// <nIndex>  is the index of the result to access.
+// <nInfoType> is the type of information to get from the result.
+//   RX_DBFILEINFO_QUERY	 0 // String result of the SQL query.
+//                             // (For internal / testing use only.)
+//   RX_DBFILEINFO_NAME		 1 //            name
+//   RX_DBFILEINFO_PATH		 2 //       path
+//   RX_DBFILEINFO_RIGHT	 3 //       path\name
+//   RX_DBFILEINFO_TABLE	 4 // table
+//   RX_DBFILEINFO_OUTER	 5 // table\     name
+//   RX_DBFILEINFO_LEFT		 6 // table\path
+//   RX_DBFILEINFO_FULL		 7 // table\path\name
+//   RX_DBFILEINFO_OWNER	 8 // owner field
+//   RX_DBFILEINFO_GROUP	 9 // group field
+//   RX_DBFILEINFO_PERMS	10 // perms field
+//   RX_DBFILEINFO_DATE		11 // date  field
+//   RX_DBFILEINFO_DATA		12 // data  field
+//   RX_DBFILEINFO_FOLDER	13 // is this a folder? return "0" or "1".
+// The return value depends on the type of information asked for.
+// Returns NULL on error.
+//
+// See: RomeDatabaseFindOpen(), RomeDatabaseFindClose().
+//
+ROME_API RT_CSTR RomeDatabaseFindInfo(RT_DBFIND* pDbFind, RT_INT nIndex, RT_UINT nInfoType)
+
+// Access individual results in a find result set.
+// See RomeDatabaseFindInfo() above for full documentation.
+//
+// This version required for use by Intel Fortran, which can't use functions
+//   which return a string pointer. Instead it must have its first 2 arguments
+//   be a pointer to a buffer and its length, to return the string in.
+//   The function must have a return type of void.
+// <pBuf> is the pointer to a buffer to return a NUL-terminated string in.
+// <nBufLen> is the length of the buffer to return a NUL-terminated string in.
+//
+ROME_API RT_VOID RomeDatabaseFindInfoF(RT_PCHAR pBuf, RT_UINT nBufLen, RT_DBFIND* pDbFind, RT_INT nIndex, RT_UINT nInfoType)
+
+
+/////////////////////////////////////////////////////////////////////////////
+// RomeEngine functions
+
+// Finish running the update stack until it is empty.
+// This should occur regardless of whether <m_bAutoUpdate> is on,
+//   and should leave the <m_bAutoUpdate> flag unchanged.
+// This is especially important in reloading files
+// Returns FALSE on failure.
+//
+// See: RomeEngineRun(), RomeEngineLockUpdate(), RomeEngineSetAutorun().
+//
+ROME_API RT_BOOL RomeEngineFinishUpdates(RT_Engine* pEngine)
+
+// Clear the Autorun flag in Rusle2.
+// When the autorun flag is set, after each value changes it will recalculate
+//   the outputs, leading to much slower performance.
+// Note that you can also avoid autoupdating in some cases by changing
+//   the values in an "auxiliary" file like a Soil, and then changing
+//   the main Profile's ptr to use that soil file after all changes have
+//   been made, which only then causes the updating to happen.
+// Returns FAILURE on error.
+//
+// See:  RomeEngineFinishUpdates(), RomeEngineRun(), RomeEngineSetAutorun().
+//
+ROME_API RT_BOOL RomeEngineGetAutorun(RT_Engine* pEngine)
+
+// Is the engine locked?
+// Returns FAILURE on error.
+//
+// See: RomeEngineLockUpdate(), RomeEngineUnlockUpdate().
+//
+ROME_API RT_BOOL RomeEngineIsLocked(RT_Engine* pEngine)
+
+// Lock the engine from running.
+// This increments a lock count.
+// The new lock count is returned.
+// Returns FAILURE on error.
+//
+// See: RomeEngineIsLocked(), RomeEngineUnlockUpdate().
+//
+ROME_API RT_INT RomeEngineLockUpdate(RT_Engine* pEngine)
+
+// Unlock the engine to allow running.
+// This decrements a lock count.
+// The new lock count is returned.
+// Returns FAILURE on error.
+//
+// See: RomeEngineIsLocked(), RomeEngineLockUpdate().
+//
+ROME_API RT_INT RomeEngineUnlockUpdate(RT_Engine* pEngine)
+
+// Run the engine until done.
+// This may not produce any change if autocalc is already on.
+// Returns FAILURE on error.
+//
+ROME_API RT_BOOL RomeEngineRun(RT_Engine* pEngine)
+
+// Set the Autorun flag in Rusle2.
+// When the autorun flag is set, after each value changes it will recalculate
+//   the outputs, leading to much slower performance.
+//
+// See: RomeEngineGetAutorun(), RomeEngineRun().
+//
+ROME_API RT_VOID RomeEngineSetAutorun(RT_Engine* pEngine, RT_BOOL bAutorun)
+
+// Set whether/not the computational engine should display the calc fn
+//   names in the status bar.
+// Returns the old locked state.
+// Note: messages are now locked using a locked count, so unlocking
+//   must be done at least as many times as locking in order to show messages.
+// This function may still be called as if the lock state was a simple
+//   boolean, and should still work the same if calls aren't nested.
+// Note: Changed to lock messages with a FALSE argument, which matches
+//   the old behavior in the import DLLs.
+// Returns FAILURE on error.
+//
+ROME_API RT_BOOL RomeEngineShowStatus(RT_Engine* pEngine, RT_BOOL bShowMessages)
+
+/////////////////////////////////////////////////////////////////////////////
+// RomeFile functions
+
+// Close an open file in the Rusle2 filesystem.
+// This also deletes a top-level file itself unless it is of type OBJT_NOCLOSE,
+//   or it is a temporary file and flag CVF_CLOSE_TEMP hasn't been set.
+// Returns TRUE if the file was closed/reloaded, otherwise FALSE.
+// Returns FAILURE on error.
+//
+// See: RomeFilesOpen(), RomeFilesCloseAll().
+//
+ROME_API RT_BOOL RomeFileClose(CFileObj* pFile)
+
+// DEPRECATED FUNCTION: This function should not be used.
+//
+// Delete a CFileObj from memory.
+// Returns FAILURE on error.
+//
+ROME_API RT_BOOL RomeFileDelete(CFileObj* pFile)
+
+// Return the [unique] instance of a named parameter in a given object.
+// This will return an existing instance if there already is one.
+// <pszAttr> is the parameter name used by the catalog.
+//   This can be a 'long' attr name with a remote prefix.
+// <pFile> is the subobject to create the attr in.
+// Returns NULL on failure.
+//
+ROME_API RT_Attr* RomeFileGetAttr(CFileObj* pFile, LPCNAME pszAttr)
+
+// DEPRECATED - use GetAttrSizeEx() instead.
+// Get the size of an attribute, returned as a short integer.
+// This will create an attr that doesn't exist yet.
+// The attr must be requested in the correct file type.
+// Note: this function cannot return a size greater than 32767.
+//   For attrs which might exceed that size, use RomeFileGetAttrSizeEx().
+//   If the size is greater than 32767, this function will return RX_FAILURE
+//   instead and set an error message which can be retrieved by RomeGetLastError().
+// <pFile> the subobject to find/create the attr in.
+// <pszAttr> the internal attr name. (e.g. "CLAY")
+// Returns the size, or RX_FAILURE (-1) on error.
+//
+// See: RomeFileGetAttrSizeEx(), RomeFileSetAttrSize()
+//
+ROME_API RT_SHORT RomeFileGetAttrSize(CFileObj* pFile, LPCNAME pszAttr) 
+
+// Get the size of an attribute, returned as a long integer.
+// This will create an attr that doesn't exist yet.
+// The attr must be requested in the correct file type.
+// Note: this function is required when the size will exceed 32767.
+// <pFile> the subobject to find/create the attr in.
+// <pszAttr> the internal attr name. (e.g. "CLAY")
+// Returns the size, or RX_FAILURE (-1) on error.
+//
+// See: RomeFileGetAttrSize(), RomeFileSetAttrSize()
+//
+ROME_API RT_INT RomeFileGetAttrSizeEx(CFileObj* pFile, LPCNAME pszAttr) 
+
+// Return the "value" string for an attribute, not display text.
+//   Note: this string should not exceed MAX_SETSTR_SIZE in length.
+// This will create an attr that doesn't exist yet.
+// The attr must be requested in the correct file type.
+// This function will use the unit and variant from the current template.
+// <pszAttr> internal attr name
+// <nIndex>  the "flat" index (use 0 for a 1x1 attr)
+//   -1 returns the "current" index of the parameter. (2007-08-10)
+//   WARNING: This function cannot handle an index of greater than 32767.
+//
+// Returns NULL on error, including out-of-range index.
+//
+// See: RomeFileSetAttrValue().
+//
+ROME_API RT_CSTR RomeFileGetAttrValue(CFileObj* pFile, LPCNAME pszAttr, RT_SHORT nIndex) 
+
+// Return the "value" string for an attribute, not display text.
+// See RomeFileGetAttrValue() above for full documentation.
+//
+// This version required for use by Intel Fortran, which can't use functions
+//   which return a string pointer. Instead it must have its first 2 arguments
+//   be a pointer to a buffer and its length, to return the string in.
+//   The function must have a return type of void.
+// <pBuf> is the pointer to a buffer to return a NUL-terminated string in.
+// <nBufLen> is the length of the buffer to return a NUL-terminated string in.
+// <nIndex>  the "flat" index (use 0 for a 1x1 attr)
+//   -1 returns the "current" index of the parameter. (2007-08-10)
+//   WARNING: This function cannot handle an index of greater than 32767.
+//
+ROME_API RT_VOID RomeFileGetAttrValueF(RT_PCHAR pBuf, RT_UINT nBufLen, RT_FileObj* pFile, RT_CNAME pszAttr, RT_SHORT nIndex)
+
+// Return the full filename of a file object.
+// This will include the table prefix.
+// Ex: "climates\default".
+// Returns NULL on failure.
+//
+ROME_API RT_CSTR RomeFileGetFullname(CFileObj* pFile)
+
+// Return the full filename of a file object.
+// See RomeFileGetFullname() above for full documentation.
+//
+// This version required for use by Intel Fortran, which can't use functions
+//   which return a string pointer. Instead it must have its first 2 arguments
+//   be a pointer to a buffer and its length, to return the string in.
+//   The function must have a return type of void.
+// <pBuf> is the pointer to a buffer to return a NUL-terminated string in.
+// <nBufLen> is the length of the buffer to return a NUL-terminated string in.
+//
+ROME_API RT_VOID RomeFileGetFullnameF(RT_PCHAR pBuf, RT_UINT nBufLen, RT_FileObj* pFile)
+
+// Save a file object to its current location.
+// Returns RX_TRUE on success, RX_FAILURE (-1) on error.
+//
+// See: RomeFilesOpen(), RomeFileSaveAs(), RomeFileSaveAsEx().
+//
+ROME_API RT_INT RomeFileSave(CFileObj* pFile)
+
+// Save this file to the database under a specific name.
+// Mark the file as clean after saving to the database.
+// <pszNewName> is the fullname of the file to save as.
+//   Example: "profiles\working\farm1".
+//   This can be an external file if prefix "#XML:" is used.
+//     Example: "#XML:C:\Rusle2\Export\profile1.pro.xml".
+//   This can be an external file if prefix "#SKEL:" is used.
+//     Example: "#SKEL:C:\Rusle2\Export\management1.man.skel".
+//
+// See: RomeFilesOpen(), RomeFileSave(), RomeFileSaveAsEx().
+//
+ROME_API RT_BOOL RomeFileSaveAs(CFileObj* pFile, LPCSTR pszNewName)
+
+// Save this file to the database under a specific name.
+// Mark the file as clean after saving to the database.
+// <pszNewName> is the fullname of the file to save as.
+//   Example: "profiles\working\farm1".
+//   This can be an external file if prefix "#XML:" is used.
+//     Example: "#XML:C:\Rusle2\Export\profile1.pro.xml".
+//   This can be an external file if prefix "#SKEL:" is used.
+//     Example: "#SKEL:C:\Rusle2\Export\management1.man.skel".
+// <nFlags> modify saving behavior.
+//   RX_FILE_SAVEASEX_CALC   Save calculated data in <Calc> tags
+// Returns TRUE on success, FALSE on failure, FAILURE on error.
+//
+// See: RomeFilesOpen(), RomeFileSave(), RomeFileSaveAs().
+//
+ROME_API RT_BOOL RomeFileSaveAsEx(CFileObj* pFile, LPCSTR pszNewName, UINT nFlags)
+
+// Set the root size of an attribute.
+// This will create an attr that doesn't exist yet.
+// The attr must be requested in the correct file type.
+//
+// pszAttr		internal attr name 
+// nNewSize		the new size (must be > 0)
+//   WARNING: This function cannot handle a size of greater than 32767.
+//
+// Returns TRUE (1) if size changed, FALSE (0) if unchanged, FAILURE (-1) on error.
+// We use "RT_SHORT" instead of "RT_BOOL" because we are returning a signed value.
+//
+// See: RomeFileGetAttrSizeEx()
+//
+ROME_API RT_SHORT RomeFileSetAttrSize(CFileObj* pFile, LPCNAME pszAttr, RT_SHORT nNewSize) 
+
+// Set the value of an attribute.
+// This will create an attr that doesn't exist yet.
+// The attr must be requested in the correct file type.
+// This function will use the unit and variant from the current template.
+//
+// pszAttr		internal attr name (e.g. "CLAY")
+// pszValue		the "value" string -- not display text
+//              This can take on special values:
+//              #INSERT - insert at [before] the index
+//              #DELETE - remove at the index
+//              Note: this string cannot exceed MAX_SETSTR_SIZE in length.
+// nIndex		the "flat" index (use 0 for a 1x1 attr)
+//   WARNING: This function cannot handle an index of greater than 32767.
+//
+// Returns TRUE(1) if value changed, FALSE(0) if unchanged, FAILURE(-1) on error.
+// We use "RT_SHORT" instead of "RT_BOOL" because we are returning a signed value.
+//
+// See: RomeFileGetAttrValue(), RomeFileSetAttrValue().
+//
+ROME_API RT_SHORT RomeFileSetAttrValue(CFileObj* pFile, LPCNAME pszAttr, LPCSTR pszValue, RT_SHORT nIndex) 
+
+/////////////////////////////////////////////////////////////////////////////
+// RomeFiles file system functions
+
+// Create a new file object.
+// <pszObjType> the name of the object type.
+//    Ex: "CLIMATE"
+// <pszFullname> the full pathname of the file, including object table name.
+//    Ex: "climates\Tennessee\Knoxville".
+// Returns NULL on failure.
+//
+ROME_API RT_FileObj* RomeFilesAdd(RT_Files* pFiles, LPCNAME pszObjType, LPCSTR pszFullname)
+
+// Close all open files (and thus all views).
+// Note that there can be open files with no view,
+//   but when all views are closed, no files should be left open
+//   unless they were opened by automation.
+// Note that the COEFFICIENTS file is an exception. It will not be
+//   closed by this fn unless flag CVF_CLOSE_NOCLOSE is used.
+// The global subobject CONSTANTS will not be closed by this fn - it isn't a file object.
+// Close top level files first. If you close a lower-level file first
+//   it can get reloaded by its referencing CPtrAttr!
+// <nFlags> flags of enum type CloseViewFlags
+//   CVF_ALLOW_SAVE	   Allow saving modified [and temp] files
+//                     If this flag isn't set, the CANCEL flag will have no effect.
+//   CVF_ALLOW_CANCEL  Allow canceling this operation
+//                     The [Cancel] button wont' be shown unless this flag is set.
+//   CVF_CLOSE_TEMP    Close temporary files
+//                     Normally temporary files remain until the app closes.
+//   CVF_CLOSE_USED	   Close files still being used
+//   CVF_CLOSE_NOCLOSE Close internal OBJT_NOCLOSE files
+//                     This should only be done on app shutdown.
+//
+// See: RomeFilesOpen(), RomeFileClose().
+//
+ROME_API RT_VOID RomeFilesCloseAll(RT_Files* pFiles, UINT nFlags /* = CVF_ALLOW_SAVE | CVF_ALLOW_CANCEL*/)
+
+// Return the number of open files.
+// This only counts files visible in the current access level.
+// Returns FAILURE (-1) on error.
+//
+ROME_API RT_INT RomeFilesGetCount(RT_Files* pFiles)
+
+// Get a file item in the collection of open files by index.
+// This only returns files visible in the current access level.
+// Returns NULL if the index is out of range.
+// Increment the reference count on the file returned.
+// This is the primary method of iterating over open files.
+// The item indexes are 0-based, and the number is obtained
+//   from property "Files.Count".
+// Returns NULL on failure.
+//
+ROME_API RT_FileObj* RomeFilesGetItem(RT_Files* pFiles, int nItem)
+
+// Opens a named file for use.
+// This can be a file in the database or one generated dynamically.
+// This can return a file with a different name than the one asked for
+//   when dealing with cloned files, load failures, etc.
+// <pszFilename> is the full name of the file, including table path.
+//   The filename part can take on special values: "#ENTRY_NONE", "#ENTRY_DEFAULT", "#ENTRY_MODEL", "#ENTRY_CUSTOM".
+//   These special values must be passed in with an object prefix.
+//   If the object type is OBJT_UNIQUE, only the type (table) needs to be specified. Any
+//     path past the object name is ignored. Ex: "no path coeff\bogus name".
+//   If only an object type is given, a file open dialog will be shown.
+//   Ex: "climates\Tennessee\Knoxville"  Opens a file from the database.
+//   Ex: "soils\#ENTRY_MODEL"            Special values require an object prefix.
+//   Ex: "no path coeff"                 Opens the unique COEFFICIENTS object.
+//   Ex: "climates"                      Opens file open dialog if only table specified.
+//   A default name like "soils\default" will always succeed.
+//   A name like "soils\#ENTRY_MODEL" will create the hard-coded file.
+//   This can be an external file if prefix "#XML:" is used.
+//     Example: "#XML:C:\Rusle2\Export\profile1.pro.xml".
+//   This can be an explicit XML file string instead of its filename. It must begin with "<?xml".
+//     Example: "<?xml version='1.0'?><Obj><Type>PROFILE</Type>...</Obj>".
+//   This can be an external file if prefix "#SKEL:" is used.
+//     Example: "#SKEL:C:\Rusle2\Export\management1.man.skel".
+// <nFlags> flags of type enum OpenModeFlags.
+//   Currently the user should pass in 0 for this argument.
+//   The following flags are added internally:
+//   RX_FILESOPEN_USE_OPEN  -- return an already open modified file.
+//   RX_FILESOPEN_NO_CREATE -- don't create a file it can't find in the database, and returns NULL.
+//   RX_FILESOPEN_LOG_HIST  -- log this action to the history log (commands.xml)
+//   RX_FILESOPEN_CMD_USER  -- caused by a user action (for logging purposes)
+// Returns a pointer to the opened file, or NULL on failure.
+//
+// See: RomeFileClose(), RomeFilesCloseAll().
+//
+ROME_API RT_FileObj* RomeFilesOpen(RT_Files* pFiles, LPCSTR pszFullname, UINT nFlags)
+
+// Use a 'pragma' function.
+// <nPragma> values RX_PRAGMA_* are defined in "imoses.h".
+// <pExtra> is used to pass in extra data.
+// The return value may depend on the action,
+//   but often indicates success(RX_TRUE)/failure(RX_FALSE).
+//
+ROME_API RT_INT RomeFilesPragma(RT_Files* pFiles, UINT nPragma, void* pExtra)
+
+/////////////////////////////////////////////////////////////////////////////
+// RomeStatus statusbar functions
+
+// Create and display a progress bar on the statusbar.
+// The progress bar should be destroyed by RomeProgressDestroy() when finished.
+// <pStatus> can be NULL, in which case it will be fetched.
+// Returns FALSE on failure.
+//
+ROME_API RT_BOOL RomeProgressCreate(RT_Statusbar* pStatus, int nLower /*= 0*/, int nUpper /*= 100*/, int nStep /*= 1*/)
+
+// Set the min and max values for a progress bar on the statusbar.
+// The progress bar should have been created with RomeProgressCreate().
+// <pStatus> can be NULL, in which case it will be fetched.
+// Returns FALSE on failure.
+//
+ROME_API RT_BOOL RomeProgressSetRange(RT_Statusbar* pStatus, int nLower /*= 0*/, int nUpper /*= 100*/)
+
+// Set the number of steps for a progress bar on the statusbar.
+// The progress bar should have been created with RomeProgressCreate().
+// <pStatus> can be NULL, in which case it will be fetched.
+// Returns FALSE on failure.
+//
+ROME_API RT_BOOL RomeProgressSetStep(RT_Statusbar* pStatus, int nStep /*= 1*/)
+
+// Step (advance) a progress bar on the statusbar.
+// The progress bar should have been created with RomeProgressCreate().
+// <pStatus> can be NULL, in which case it will be fetched.
+// Returns FALSE on failure.
+//
+ROME_API RT_BOOL RomeProgressStepIt(RT_Statusbar* pStatus)
+
+// Destroy a progress bar on the statusbar.
+// The progress bar should have been created with RomeProgressCreate().
+// <pStatus> can be NULL, in which case it will be fetched.
+// Returns FALSE on failure.
+//
+ROME_API RT_BOOL RomeProgressDestroy(RT_Statusbar* pStatus)
+
+// Show a message in the status bar's first pane.
+// <pStatus> can be NULL, in which case it will be fetched.
+// <lpszNewText> is the new message text to set.
+//   If this is a title key, it will automatically be translated.
+//   The message text can take on special values:
+//   #LOCK_ENGINE_MESSAGES    increment lock count for engine messages
+//   #UNLOCK_ENGINE_MESSAGES  decrement lock count for engine messages
+// Returns TRUE on success. This does not indicate if the displayed text changed.
+// Returns FALSE on failure.
+//
+ROME_API RT_BOOL RomeStatusbarMessage(RT_Statusbar* pStatus, LPCSTR lpszNewText, RT_BOOL bUpdate /*= RX_TRUE*/)
+
+/////////////////////////////////////////////////////////////////////////////

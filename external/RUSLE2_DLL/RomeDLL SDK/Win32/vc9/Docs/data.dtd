@@ -1,0 +1,215 @@
+<!--
+  External DTD for validating XML archives that are created by Rusle2.
+  By default this is not included in the archive but can be manually using
+    <!DOCTYPE Obj SYSTEM "absolute or relative path to DTD file">
+
+  Files which are stored externally (outside the database) will have the
+following doctype declaration inserted, to prevent browsers from being
+confused by custom entities used to encode some strings.
+  Note that == has been used to represent XML comment symbols.
+  <!DOCTYPE Obj
+  [
+    <!ENTITY und '&#x5F;'><!== '_' ==>
+    <!ENTITY per '&#x25;'><!== '%' ==>
+  ] >
+
+  Rusle2 is not sensitive to the order of elements. We load the entire XML file
+first and use a DOM interface to access the XML data.
+  All files have the same format, independent of the object type of the file.
+e.g. A climate file stored in "climates" uses the same format as a file stored
+in "managements". Only the contents will change.
+  The allowable names for parameters, and their default values are specified in
+the "catalog" description, which is stored as another XML file.
+-->
+
+
+<!-- ======================================================================= -->
+
+
+<!-- The following elements are saved for all parameters.
+  Name - The internal name used by Rusle2. (e.g. "SAND").
+  Dims - The dimensions of this parameter (up to 2).
+         These can either be named parameters, or decimal integers.
+		 If there is more than one they will be separated by a comma.
+		 If this element isn't present the default is "1".
+  Fn   - The calc function for this parameter.
+  Data - The data for this parameter.
+         This can be stored for some parameters which have a calc function.
+  Calc - Purely calculated data.
+         This element is only stored when saving files for regression tests.
+  Unit - The unit associated with the data. This is an internal Rusle2 name.
+         (e.g. "U_KG_P_YR" == "kg/year")
+  Var  - Data "variant". We use 2 types:
+         "interval"   (default) data is stored as interval values.
+		 "cumulative" data is stored as a sum of all values from the 0th.
+
+  The elements <ConcurFn> and <NoResizeTrigger> were saved in the past,
+but are no longer used, and are discarded on loading.
+  -->
+<!ENTITY % allParamTags
+    "(Name, Dims?, Fn?, (Data|Calc)?, Unit?, Var?)"
+>
+
+
+<!-- All data is stored inside "objects".
+  A "file" object is the basic unit of information we store.
+  Objects can also nest recursively.
+  <Obj> is used for file objects. It is the only element that can't be stored
+        inside another object. In general <Sub> and parameter elements can be
+		stored inside eachother.
+  <Sub> is used for sub-objects, which are stored inside other objects.
+  All Rusle2 parameters are stored inside either a <Sub> or <Obj> object.
+  The <Type> element is stored in <Obj> elements to allow reading them back in
+from disk without having to guess what object type they represent.
+  -->
+<!ELEMENT Obj
+    (Type, Filename?, Science, (Bit|Bol|Dte|Flt|Lst|Pic|ObR|Rmt|Str|SbR|Ovr)*)
+>
+
+<!ELEMENT Sub (Bit|Bol|Dte|Flt|Lst|Pic|ObR|Rmt|Str|SbR|Ovr)*
+>
+
+
+<!-- ======================================================================= -->
+<!-- Parameters stored by Rusle2
+  Parameters are classified by the type of data they store.
+  Note that all parameters can store the data value "NaN" in their <Data> element.
+This represents a value that is missing. It is not an IEEE NaN value, and can
+be used for most parameter types. Parameters which store string data will
+generally use an empty string instead of the string "NaN".
+  <Flt> parameters are used to store both floating point and integer data.
+These form the bulk of all Rusle2 parameters.
+  <Rmt> parameters are "proxies" for other parameters. They store the name of
+another file to get the actual values from.
+  <Ovr> parameters are a type of remote parameter, that can  store their own
+data, which overrides that of the actual parameter which they are a remote of.
+  Parameters are now serialized in alphabetical order in each object to make 
+diffs easier. This is done without regard to parameter type.
+  -->
+
+<!ELEMENT Bit %allParamTags; >  <!-- Bitmap -->
+<!ELEMENT Bol %allParamTags; >  <!-- Boolean -->
+<!ELEMENT Dte %allParamTags; >  <!-- Date -->
+<!ELEMENT Flt %allParamTags; >  <!-- Float -->
+<!ELEMENT Lst %allParamTags; >  <!-- List -->
+<!ELEMENT Pic %allParamTags; >  <!-- Picture -->
+<!ELEMENT Rmt %allParamTags; >  <!-- Remote -->
+<!ELEMENT Str %allParamTags; >  <!-- String -->
+<!ELEMENT Ovr %allParamTags; >  <!-- Override -->
+
+
+<!-- Object pointer parameters point to another object type.
+  The <Type> element is listed as optional for historical reasons, but is
+always stored.
+  -->
+<!ELEMENT ObR (%allParamTags;, Type?) >  <!-- Pointer -->
+
+
+<!-- SbR parameters store subobjects internally.
+  The subobject's types are stored in the <Data> element.
+  They may be different for every index.
+  The <Sub> elements should match the number of entries in the <Data> element.
+  It is legal to omit trailing <Sub> elements which are empty. So it is legal
+to not store any <Sub> elements if they are all empty, which will be the case
+if they only have default data.
+  -->
+<!ELEMENT SbR (%allParamTags;, Sub*)  >  <!-- SubPtr -->
+
+
+<!-- ======================================================================= -->
+<!-- Tags stored inside an object.
+  -->
+
+
+<!-- The full pathname of this file.
+  This is the full name of the file as it was originally stored in the database
+    when it was exported.
+  This will have no encoding done on it other than that required by XML.
+  Example: "climates\Tennessee\Knox County".
+  This includes the "table" prefix (e.g. "climates" above).
+  -->
+<!ELEMENT Filename (#PCDATA)* >
+
+
+<!-- The "science date" of this file.
+  This is an integer date of the last major change to the science code in the
+version of the model used to save this file.
+  It is stored in decimal format: YYYYMMDD (e.g. 20041020).
+  -->
+<!ELEMENT Science (#PCDATA)* >
+
+
+<!-- The type of a file object.
+  This is the internal type used by Rusle2 (e.g. CLIMATE), not the name of the
+database table it is stored in (e.g. "climates").
+  -->
+<!ELEMENT Type    (#PCDATA)* >
+
+
+<!-- ======================================================================= -->
+<!-- Tags stored inside a parameter element.
+  -->
+
+
+<!-- The internal name of a parameter or object.
+  -->
+<!ELEMENT Name (#PCDATA)* >
+
+
+<!-- The dimensions of this parameter (up to 2).
+  These can either be named parameters, or decimal integers.
+  If there is more than one they will be separated by a comma.
+  If this element isn't present the default is "1".
+  Ex: "DIM1, DIM2"
+  Ex: "100, 10"
+  Ex: "20"
+  -->
+<!ELEMENT Dims (#PCDATA)* >
+
+
+<!-- The name of the calc function used to calculate a parameter (if any).
+  Parameters which are are calculated can still be stored in order to save
+their size, if they are a dimension of another parameter.
+  We also store parameters if the user has entered data by hand to override 
+calculated values.
+  -->
+<!ELEMENT Fn   (#PCDATA)* >
+
+
+<!-- The data stored for this parameter.
+  The <Data> element's text will be a string of values separated by whitespace.
+  If the values can contain spaces, they are single-quoted, and any single quotes
+in the value strings are replaced with "&apos;".
+  These substrings are XML-encoded to escape any single quotes they might contain,
+since that would prevent us from being able to parse the string into substrings.
+  In the past we used "&apos;" (note difference) which is automatically expanded by
+XML parsers, which breaks our ability to distinguish between an apostrophe embedded
+in a string, and a string delimiter. These must be fixed on loading in.
+  -->
+<!ELEMENT Data (#PCDATA)* >
+
+<!-- <Calc> elements are used for purely calculated data.
+  These elements are only stored for files saved outside the database.
+  -->
+<!ELEMENT Calc (#PCDATA)* >
+<!ATTLIST Calc
+	size	CDATA	#IMPLIED
+	value	CDATA	#IMPLIED
+>
+
+
+<!-- The unit associated with the data.
+  This is an internal Rusle2 name.
+  Ex: "U_KG_P_YR" == "kg/year"
+  -->
+<!ELEMENT Unit (#PCDATA)* >
+
+
+<!-- Data "variant". We use 2 types:
+  "interval"   (default) data is stored as interval values.
+  "cumulative" data is stored as a sum of all values from the 0th.
+  -->
+<!ELEMENT Var  (#PCDATA)* >
+
+
+<!-- ======================================================================= -->
